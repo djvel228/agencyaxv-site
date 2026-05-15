@@ -312,6 +312,10 @@
       #about .reveal[style*="grid-template-columns:1fr 1fr"] { grid-template-columns:1fr !important; }
     }
 
+    /* ── Case photo placeholder ── */
+    .case-photo-placeholder { width:100%; height:140px; background:linear-gradient(135deg,rgba(242,118,158,0.1),rgba(242,118,158,0.03)); border:1px dashed rgba(242,118,158,0.25); border-radius:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; margin-bottom:18px; }
+    .case-photo-placeholder span { font-size:.6rem; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); }
+
     /* ── Quiz result grid ── */
     .quiz-res-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
     .quiz-res-card { border-radius: 12px; padding: 18px; text-align: center; }
@@ -793,10 +797,10 @@
         </div>
         <div class="svc-card-body">
           <div class="svc-card-title" data-i18n="svc3_title">Чат-менеджмент</div>
-          <div class="svc-card-desc" data-i18n="svc3_desc">Профессиональные чаттеры 16+ часов ежедневно, обученные под твою персону. Максимум чаевых, PPV-продаж и лояльности фанатов.</div>
+          <div class="svc-card-desc" data-i18n="svc3_desc">Профессиональные чаттеры 24/7, обученные под твою персону. Максимум чаевых, PPV-продаж и лояльности фанатов.</div>
           <div class="svc-card-div"></div>
           <ul class="svc-card-list">
-            <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="svc3_f1">Покрытие 16 ч/день без выходных</span></li>
+            <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="svc3_f1">Покрытие 24/7 без выходных</span></li>
             <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="svc3_f2">PPV-апселлы и чаевые</span></li>
             <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="svc3_f3">Персона-гайд для чаттеров</span></li>
           </ul>
@@ -880,21 +884,30 @@
     <div class="cases-grid">
 
       <div class="case-card reveal d1">
-        <div class="case-tag" data-i18n="case1_tag">Lifestyle · с нуля</div>
+        <div class="case-photo-placeholder">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1" opacity="0.45"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span data-i18n="case_photo_label">Фото кейса</span>
+        </div>
         <p class="case-action" data-i18n="case1_action">Запустили трафик с Reddit + TikTok, выстроили чат-продажи PPV с первой недели.</p>
         <div class="case-result" data-stat="4200" data-prefix="$">$0</div>
         <div class="case-period" data-i18n="case1_period">за первый месяц</div>
       </div>
 
       <div class="case-card reveal d2">
-        <div class="case-tag" data-i18n="case2_tag">Fitness · был доход $800</div>
+        <div class="case-photo-placeholder">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1" opacity="0.45"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span data-i18n="case_photo_label">Фото кейса</span>
+        </div>
         <p class="case-action" data-i18n="case2_action">Пересобрали стратегию ценообразования, подключили массовые PPV-рассылки и шаутауты.</p>
         <div class="case-result" data-stat="6100" data-prefix="$">$0</div>
         <div class="case-period" data-i18n="case2_period">через 60 дней</div>
       </div>
 
       <div class="case-card reveal d3">
-        <div class="case-tag" data-i18n="case3_tag">Cosplay · был доход $2K</div>
+        <div class="case-photo-placeholder">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1" opacity="0.45"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span data-i18n="case_photo_label">Фото кейса</span>
+        </div>
         <p class="case-action" data-i18n="case3_action">Масштабировали платный трафик, внедрили систему удержания и апселлов через чат.</p>
         <div class="case-result" data-stat="18000" data-prefix="$">$0</div>
         <div class="case-period" data-i18n="case3_period">за 3 месяца работы</div>
@@ -1256,13 +1269,14 @@
       svc1_f1: 'Оптимизация цен и подписок', svc1_f2: 'Аналитика дохода', svc1_f3: 'Удержание подписчиков',
       svc2_title: 'Трафик и продвижение', svc2_desc: 'Мультиплатформенный рост аудитории — Reddit, TikTok, Instagram, Twitter/X. Воронки которые приводят платящих подписчиков.',
       svc2_f1: 'Мультиплатформенные шаутауты', svc2_f2: 'Органические воронки роста', svc2_f3: 'Управление платной рекламой',
-      svc3_title: 'Чат-менеджмент', svc3_desc: 'Профессиональные чаттеры 16+ часов ежедневно, обученные под твою персону. Максимум чаевых, PPV-продаж и лояльности фанатов.',
-      svc3_f1: 'Покрытие 16 ч/день без выходных', svc3_f2: 'PPV-апселлы и чаевые', svc3_f3: 'Персона-гайд для чаттеров',
+      svc3_title: 'Чат-менеджмент', svc3_desc: 'Профессиональные чаттеры 24/7, обученные под твою персону. Максимум чаевых, PPV-продаж и лояльности фанатов.',
+      svc3_f1: 'Покрытие 24/7 без выходных', svc3_f2: 'PPV-апселлы и чаевые', svc3_f3: 'Персона-гайд для чаттеров',
       svc4_title: 'Контент-план', svc4_desc: 'Еженедельный план под алгоритм платформы — что снимать, когда публиковать, как оформлять для максимального охвата.',
       svc4_f1: 'Еженедельное расписание', svc4_f2: 'Оптимизация под алгоритм', svc4_f3: 'Идеи тем и форматов',
       svc5_title: 'Аналитика и стратегия', svc5_desc: 'Еженедельный отчёт по доходу, конверсии и росту. Работаем с ценообразованием и PPV-акциями для долгосрочного результата.',
       svc5_f1: 'Отчёт каждую неделю', svc5_f2: 'PPV-кампании и акции', svc5_f3: 'Долгосрочный рост дохода',
-      res_label: 'Доказанные результаты', res_title: 'Наши цифры<br><em class="pink-text" style="font-style:italic;">говорят сами за себя</em>',
+      res_label: 'Результаты', res_title: 'Наши цифры<br><em class="pink-text" style="font-style:italic;">говорят сами за себя</em>',
+      case_photo_label: 'Фото кейса',
       res_stat1: 'Рекорд одной модели\nв месяц', res_stat2: 'Рост дохода\nза первые 90 дней', res_stat3: 'Моделей под\nуправлением сейчас',
       case1_tag: 'Lifestyle · с нуля', case1_action: 'Запустили трафик с Reddit + TikTok, выстроили чат-продажи PPV с первой недели.', case1_period: 'за первый месяц',
       case2_tag: 'Fitness · был доход $800', case2_action: 'Пересобрали стратегию ценообразования, подключили массовые PPV-рассылки и шаутауты.', case2_period: 'через 60 дней',
@@ -1278,10 +1292,10 @@
       calc_btn: 'Обсудить мой потенциал',
       terms_label: 'Условия сотрудничества', terms_title: 'Всё прозрачно.<br><em class="pink-text" style="font-style:italic;">Никаких сюрпризов.</em>',
       term1_title: 'Процент агентства', term1_desc: 'Работаем по модели <span class="term-highlight">revenue share — 25–30%</span> от дохода страницы. Зарабатываем только когда зарабатываешь ты. Никаких авансов и фиксированных платежей.',
-      term2_title: 'Что входит', term2_desc: 'Трафик и продвижение, чат-менеджмент 16ч/день, еженедельный контент-план, аналитика и отчёты, стратегия ценообразования и PPV.',
-      term3_title: 'Выплаты', term3_desc: 'Выплаты <span class="term-highlight">еженедельно</span> — каждую пятницу. Ты видишь полную аналитику платформы и всегда знаешь сколько заработала.',
+      term2_title: 'Что входит', term2_desc: 'Трафик и продвижение, чат-менеджмент 24/7, еженедельный контент-план, аналитика и отчёты, стратегия ценообразования и PPV.',
+      term3_title: 'Выплаты', term3_desc: 'Выплаты <span class="term-highlight">каждые две недели</span>. Ты видишь полную аналитику платформы и всегда знаешь сколько заработала.',
       term4_title: 'Прозрачность', term4_desc: 'Аккаунт остаётся твоим на 100%. Ты в любое время видишь всю аналитику, доступ к странице у тебя — мы работаем как твоя команда, а не вместо тебя.',
-      term5_title: 'Выход из сотрудничества', term5_desc: 'Уведомление за <span class="term-highlight">14 дней</span> — и мы расходимся без штрафов и претензий. Мы заинтересованы чтобы ты оставалась, поэтому строим отношения на результате, а не на договоре.',
+      term5_title: 'Выход из сотрудничества', term5_desc: 'Уведомление за <span class="term-highlight">30 дней</span> — и мы расходимся без штрафов и претензий. Мы заинтересованы чтобы ты оставалась, поэтому строим отношения на результате, а не на договоре.',
       proc_label: 'Как начать', proc_title: 'Четыре шага.<br><em class="pink-text" style="font-style:italic;">И ты уже растёшь.</em>',
       step1_title: 'Пишешь нам в Telegram', step1_desc: 'Просто напиши — без длинных анкет. Скажи что ты модель и хочешь обсудить сотрудничество. Мы ответим в течение часа.',
       step2_title: 'Бесплатная консультация', step2_desc: 'Созваниваемся и разбираем твою ситуацию — нишу, текущий доход, цели. Без продаж и давления. Честно говорим что реально для тебя.',
@@ -1291,7 +1305,7 @@
       faq1_q: 'Как работает оплата? Вы берёте процент?',
       faq1_a: 'Мы работаем по модели revenue share — зарабатываем только тогда, когда зарабатываешь ты. Никаких авансов и фиксированных платежей. Точный процент обсуждается индивидуально на первом звонке, исходя из твоего текущего дохода и целей.',
       faq2_q: 'Я потеряю контроль над аккаунтом?',
-      faq2_a: 'Нет. Аккаунт остаётся твоим на 100%. Мы работаем как твоя команда, берём на себя ежедневные процессы, но весь стратегический и творческий контроль остаётся у тебя. Ты видишь всё через еженедельные отчёты.',
+      faq2_a: 'Нет. Аккаунт остаётся твоим на 100%. Мы работаем с тобой вместе как команда, берём на себя ежедневные процессы и стратегический контроль, а ты занимаешься творчеством и снимаешь контент. Ты видишь всю статистику через нашу настроенную CRM систему каждый день без препятствий и в любое время.',
       faq3_q: 'Нужен ли минимальный доход для старта?',
       faq3_a: 'Мы работаем с моделями на разных этапах, включая старт с нуля. Главное — качество контента и желание расти. Напиши нам, и на первом звонке честно скажем, что реально в твоей ситуации.',
       faq4_q: 'Кто будет общаться с моими подписчиками?',
@@ -1321,7 +1335,7 @@
       insight_result: 'Средний рост за 90 дней ×3–4. Можем показать реальные кейсы с цифрами ещё до подписания договора.',
       insight_nothing: 'Отлично — бесплатная консультация без давления и обязательств. Просто поговорим.',
       faq_label: 'FAQ',
-      cta_label: 'Готова обсудить сотрудничество?', cta_title: 'Давай строить<br><em class="pink-text" style="font-style:italic;">твою империю</em>',
+      cta_label: 'Готова обсудить сотрудничество?', cta_title: 'Давай строить нашу<br><em class="pink-text" style="font-style:italic;">империю вместе</em>',
       cta_desc: 'Напиши нам — ответим в течение часа и проведём бесплатную консультацию.',
       cta_btn: 'Написать в Telegram',
       trust1: 'NDA защита', trust2: 'Ответ за час', trust3: 'Бесплатная консультация',
@@ -1344,13 +1358,14 @@
       svc1_f1: 'Pricing optimization', svc1_f2: 'Revenue analytics', svc1_f3: 'Subscriber retention',
       svc2_title: 'Traffic & Promotion', svc2_desc: 'Multi-platform audience growth — Reddit, TikTok, Instagram, Twitter/X. Funnels that bring subscribers who actually pay.',
       svc2_f1: 'Multi-platform shoutouts', svc2_f2: 'Organic growth funnels', svc2_f3: 'Paid ads management',
-      svc3_title: 'Chat Management', svc3_desc: 'Professional chatters 16+ hours daily, trained on your persona. Maximized tips, PPV sales, and fan loyalty without your time.',
-      svc3_f1: '16h/day coverage', svc3_f2: 'PPV upsells & tips', svc3_f3: 'Persona guide',
+      svc3_title: 'Chat Management', svc3_desc: 'Professional chatters 24/7, trained on your persona. Maximized tips, PPV sales, and fan loyalty without your time.',
+      svc3_f1: '24/7 coverage', svc3_f2: 'PPV upsells & tips', svc3_f3: 'Persona guide',
       svc4_title: 'Content Plan', svc4_desc: 'Weekly schedule aligned with platform algorithms — what to shoot, when to post, how to present for maximum reach.',
       svc4_f1: 'Weekly schedule', svc4_f2: 'Algorithm optimization', svc4_f3: 'Ideas & formats',
       svc5_title: 'Analytics & Strategy', svc5_desc: 'Weekly reports on revenue, conversion and growth. We work on pricing and PPV campaigns for long-term results.',
       svc5_f1: 'Weekly reports', svc5_f2: 'PPV campaigns & promos', svc5_f3: 'Long-term revenue growth',
-      res_label: 'Proven results', res_title: 'Our numbers<br><em class="pink-text" style="font-style:italic;">speak for themselves</em>',
+      res_label: 'Results', res_title: 'Our numbers<br><em class="pink-text" style="font-style:italic;">speak for themselves</em>',
+      case_photo_label: 'Case photo',
       res_stat1: 'Record for one model\nper month', res_stat2: 'Revenue growth\nin first 90 days', res_stat3: 'Models under\nactive management',
       case1_tag: 'Lifestyle · from zero', case1_action: 'Launched Reddit + TikTok traffic, built PPV chat sales from week one.', case1_period: 'in the first month',
       case2_tag: 'Fitness · had $800 revenue', case2_action: 'Rebuilt pricing strategy, launched mass PPV campaigns and shoutouts.', case2_period: 'after 60 days',
@@ -1366,10 +1381,10 @@
       calc_btn: 'Discuss My Potential',
       terms_label: 'Partnership terms', terms_title: 'Fully transparent.<br><em class="pink-text" style="font-style:italic;">No surprises.</em>',
       term1_title: 'Agency fee', term1_desc: 'We work on <span class="term-highlight">revenue share — 25–30%</span> of page income. We earn only when you earn. No upfront fees or fixed payments.',
-      term2_title: 'What\'s included', term2_desc: 'Traffic & promotion, chat management 16h/day, weekly content plan, analytics & reports, pricing and PPV strategy.',
-      term3_title: 'Payouts', term3_desc: 'Payouts <span class="term-highlight">every week</span> — every Friday. You see full platform analytics and always know how much you earned.',
+      term2_title: 'What\'s included', term2_desc: 'Traffic & promotion, chat management 24/7, weekly content plan, analytics & reports, pricing and PPV strategy.',
+      term3_title: 'Payouts', term3_desc: 'Payouts <span class="term-highlight">every two weeks</span>. You see full platform analytics and always know how much you earned.',
       term4_title: 'Transparency', term4_desc: 'Your account stays 100% yours. You can view all analytics at any time — we work as your team, not instead of you.',
-      term5_title: 'Exit policy', term5_desc: '<span class="term-highlight">14 days notice</span> — and we part ways without penalties or disputes. We\'re incentivised to keep you, so we build on results, not contracts.',
+      term5_title: 'Exit policy', term5_desc: '<span class="term-highlight">30 days notice</span> — and we part ways without penalties or disputes. We\'re incentivised to keep you, so we build on results, not contracts.',
       proc_label: 'How to start', proc_title: 'Four steps.<br><em class="pink-text" style="font-style:italic;">And you\'re already growing.</em>',
       step1_title: 'Write us on Telegram', step1_desc: 'Just message us — no long forms. Say you\'re a model and want to discuss working together. We reply within an hour.',
       step2_title: 'Free consultation', step2_desc: 'We get on a call and discuss your situation — niche, current income, goals. No sales pressure. Honest assessment.',
@@ -1379,7 +1394,7 @@
       faq1_q: 'How does payment work? Do you take a percentage?',
       faq1_a: 'We work on a revenue-share model — we earn only when you earn. No upfront fees, no fixed costs. The exact split is discussed individually during the onboarding call, based on your current revenue and goals.',
       faq2_q: 'Do I lose control of my account?',
-      faq2_a: 'No. Your account stays 100% yours. We operate as your dedicated team, handling daily operations while you retain full creative and strategic control. You see everything through weekly reports.',
+      faq2_a: 'No. Your account stays 100% yours. We work alongside you as a team, handling daily operations and strategic management, while you focus on creativity and content creation. You see all your statistics through our configured CRM system every day, without restrictions and at any time.',
       faq3_q: 'Is there a minimum revenue required to start?',
       faq3_a: 'We work with models at various stages, including those starting from zero. What matters most is content quality and motivation to grow. Apply — we\'ll give you an honest evaluation on the call.',
       faq4_q: 'Who will be talking to my subscribers?',
@@ -1409,7 +1424,7 @@
       insight_result: 'Average growth ×3–4 in 90 days. We can show real cases with numbers before you sign anything.',
       insight_nothing: 'Great — a free consultation, no pressure, no obligations. Let\'s just talk.',
       faq_label: 'FAQ',
-      cta_label: 'Ready to discuss?', cta_title: 'Let\'s build<br><em class="pink-text" style="font-style:italic;">your empire</em>',
+      cta_label: 'Ready to discuss?', cta_title: 'Let\'s build our<br><em class="pink-text" style="font-style:italic;">empire together</em>',
       cta_desc: 'Write to us — we\'ll reply within an hour and run a free consultation.',
       cta_btn: 'Write on Telegram',
       trust1: 'NDA Protection', trust2: 'Reply within 1 hour', trust3: 'Free consultation',
@@ -1432,13 +1447,14 @@
       svc1_f1: 'Оптимізація цін і підписок', svc1_f2: 'Аналітика доходу', svc1_f3: 'Утримання підписників',
       svc2_title: 'Трафік і просування', svc2_desc: 'Мультиплатформенне зростання аудиторії — Reddit, TikTok, Instagram, Twitter/X. Воронки що приводять платящих підписників.',
       svc2_f1: 'Мультиплатформенні шаутаути', svc2_f2: 'Органічні воронки зростання', svc2_f3: 'Управління платною рекламою',
-      svc3_title: 'Чат-менеджмент', svc3_desc: 'Професійні чаттери 16+ годин щодня, навчені під твою персону. Максимум чайових, PPV-продажів і лояльності фанатів.',
-      svc3_f1: 'Покриття 16 год/день без вихідних', svc3_f2: 'PPV-апселли та чайові', svc3_f3: 'Персона-гайд для чаттерів',
+      svc3_title: 'Чат-менеджмент', svc3_desc: 'Професійні чаттери 24/7, навчені під твою персону. Максимум чайових, PPV-продажів і лояльності фанатів.',
+      svc3_f1: 'Покриття 24/7 без вихідних', svc3_f2: 'PPV-апселли та чайові', svc3_f3: 'Персона-гайд для чаттерів',
       svc4_title: 'Контент-план', svc4_desc: 'Щотижневий план під алгоритм платформи — що знімати, коли публікувати, як оформлювати для максимального охоплення.',
       svc4_f1: 'Щотижневий розклад', svc4_f2: 'Оптимізація під алгоритм', svc4_f3: 'Ідеї тем і форматів',
       svc5_title: 'Аналітика і стратегія', svc5_desc: 'Щотижневий звіт по доходу, конверсії та зростанню. Працюємо з ціноутворенням і PPV-акціями для довгострокового результату.',
       svc5_f1: 'Звіт щотижня', svc5_f2: 'PPV-кампанії та акції', svc5_f3: 'Довгострокове зростання доходу',
-      res_label: 'Доведені результати', res_title: 'Наші цифри<br><em class="pink-text" style="font-style:italic;">говорять самі за себе</em>',
+      res_label: 'Результати', res_title: 'Наші цифри<br><em class="pink-text" style="font-style:italic;">говорять самі за себе</em>',
+      case_photo_label: 'Фото кейсу',
       res_stat1: 'Рекорд однієї моделі\nна місяць', res_stat2: 'Ріст доходу\nза перші 90 днів', res_stat3: 'Моделей під\nактивним управлінням',
       case1_tag: 'Lifestyle · з нуля', case1_action: 'Запустили трафік з Reddit + TikTok, вибудували чат-продажі PPV з першого тижня.', case1_period: 'за перший місяць',
       case2_tag: 'Fitness · був дохід $800', case2_action: 'Пересобрали стратегію ціноутворення, підключили масові PPV-розсилки та шаутаути.', case2_period: 'через 60 днів',
@@ -1454,10 +1470,10 @@
       calc_btn: 'Обговорити мій потенціал',
       terms_label: 'Умови співпраці', terms_title: 'Все прозоро.<br><em class="pink-text" style="font-style:italic;">Ніяких сюрпризів.</em>',
       term1_title: 'Відсоток агентства', term1_desc: 'Працюємо за моделлю <span class="term-highlight">revenue share — 25–30%</span> від доходу сторінки. Заробляємо лише коли заробляєш ти.',
-      term2_title: 'Що входить', term2_desc: 'Трафік і просування, чат-менеджмент 16год/день, щотижневий контент-план, аналітика і звіти, стратегія ціноутворення та PPV.',
-      term3_title: 'Виплати', term3_desc: 'Виплати <span class="term-highlight">щотижня</span> — кожної п\'ятниці. Ти бачиш повну аналітику платформи і завжди знаєш скільки заробила.',
+      term2_title: 'Що входить', term2_desc: 'Трафік і просування, чат-менеджмент 24/7, щотижневий контент-план, аналітика і звіти, стратегія ціноутворення та PPV.',
+      term3_title: 'Виплати', term3_desc: 'Виплати <span class="term-highlight">кожні два тижні</span>. Ти бачиш повну аналітику платформи і завжди знаєш скільки заробила.',
       term4_title: 'Прозорість', term4_desc: 'Акаунт залишається твоїм на 100%. Ти в будь-який час бачиш всю аналітику — ми працюємо як твоя команда, а не замість тебе.',
-      term5_title: 'Вихід зі співпраці', term5_desc: 'Повідомлення за <span class="term-highlight">14 днів</span> — і ми розходимося без штрафів і претензій.',
+      term5_title: 'Вихід зі співпраці', term5_desc: 'Повідомлення за <span class="term-highlight">30 днів</span> — і ми розходимося без штрафів і претензій. Ми зацікавлені щоб ти залишалась, тому будуємо відносини на результаті, а не на договорі.',
       proc_label: 'Як почати', proc_title: 'Чотири кроки.<br><em class="pink-text" style="font-style:italic;">І ти вже зростаєш.</em>',
       step1_title: 'Пишеш нам в Telegram', step1_desc: 'Просто напиши — без довгих анкет. Скажи що ти модель і хочеш обговорити співпрацю. Ми відповімо протягом години.',
       step2_title: 'Безкоштовна консультація', step2_desc: 'Телефонуємо і розбираємо твою ситуацію — нішу, поточний дохід, цілі. Без продажів і тиску.',
@@ -1467,7 +1483,7 @@
       faq1_q: 'Як працює оплата? Ви берете відсоток?',
       faq1_a: 'Ми працюємо за моделлю revenue share — заробляємо лише тоді, коли заробляєш ти. Ніяких авансів і фіксованих платежів. Точний відсоток обговорюється індивідуально на першому дзвінку, виходячи з твого поточного доходу та цілей.',
       faq2_q: 'Я втрачу контроль над акаунтом?',
-      faq2_a: 'Ні. Акаунт залишається твоїм на 100%. Ми працюємо як твоя команда, беремо на себе щоденні процеси, але весь стратегічний і творчий контроль залишається у тебе. Ти бачиш все через щотижневі звіти.',
+      faq2_a: 'Ні. Акаунт залишається твоїм на 100%. Ми працюємо з тобою разом як команда, беремо на себе щоденні процеси і стратегічний контроль, а ти займаєшся творчістю і знімаєш контент. Ти бачиш всю статистику через нашу налаштовану CRM систему кожен день без перешкод і в будь-який час.',
       faq3_q: 'Чи потрібен мінімальний дохід для старту?',
       faq3_a: 'Ми працюємо з моделями на різних етапах, включно зі стартом з нуля. Головне — якість контенту і бажання рости. Напиши нам, і на першому дзвінку чесно скажемо, що реально в твоїй ситуації.',
       faq4_q: 'Хто буде спілкуватися з моїми підписниками?',
@@ -1497,7 +1513,7 @@
       insight_result: 'Середнє зростання за 90 днів ×3–4. Можемо показати реальні кейси з цифрами ще до підписання договору.',
       insight_nothing: 'Чудово — безкоштовна консультація без тиску і зобов\'язань. Просто поговоримо.',
       faq_label: 'FAQ',
-      cta_label: 'Готова обговорити співпрацю?', cta_title: 'Давай будувати<br><em class="pink-text" style="font-style:italic;">твою імперію</em>',
+      cta_label: 'Готова обговорити співпрацю?', cta_title: 'Давай будувати нашу<br><em class="pink-text" style="font-style:italic;">імперію разом</em>',
       cta_desc: 'Напиши нам — відповімо протягом години і проведемо безкоштовну консультацію.',
       cta_btn: 'Написати в Telegram',
       trust1: 'NDA захист', trust2: 'Відповідь за годину', trust3: 'Безкоштовна консультація',
