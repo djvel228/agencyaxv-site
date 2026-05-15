@@ -290,7 +290,7 @@
     .quiz-opts { display:flex; flex-direction:column; gap:10px; }
     .quiz-opt {
       background:var(--surface); border:1px solid var(--border);
-      border-radius:12px; padding:14px 20px; text-align:left;
+      border-radius:12px; padding:14px 20px; display:flex; align-items:center; gap:12px; text-align:left;
       font-family:'Montserrat',sans-serif; font-size:.875rem; color:var(--white);
       cursor:pointer; transition:border-color .25s, background .25s, transform .2s var(--ease);
     }
@@ -614,11 +614,11 @@
         <div class="quiz-step active" data-step="1">
           <p class="quiz-q" data-i18n="quiz_q1">Какой у тебя типаж?</p>
           <div class="quiz-opts">
-            <button class="quiz-opt" data-val="babyface">👶 Babyface</button>
-            <button class="quiz-opt" data-val="milf">💄 Milf</button>
-            <button class="quiz-opt" data-val="asian">🌸 Asian</button>
-            <button class="quiz-opt" data-val="girlnextdoor">🏡 Girl next door</button>
-            <button class="quiz-opt" data-val="other" data-i18n="qo1_5">✨ Другая</button>
+            <button class="quiz-opt" data-val="babyface"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg> Babyface</button>
+            <button class="quiz-opt" data-val="milf"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polygon points="6 3 18 3 22 9 12 22 2 9"/><line x1="2" y1="9" x2="22" y2="9"/><line x1="12" y1="3" x2="12" y2="22"/></svg> Milf</button>
+            <button class="quiz-opt" data-val="asian"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="7" rx="1.8" ry="3"/><ellipse cx="12" cy="17" rx="1.8" ry="3"/><ellipse cx="7" cy="12" rx="3" ry="1.8"/><ellipse cx="17" cy="12" rx="3" ry="1.8"/></svg> Asian</button>
+            <button class="quiz-opt" data-val="girlnextdoor"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg> Girl next door</button>
+            <button class="quiz-opt" data-val="other"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg> <span data-i18n="qo1_5">Другая</span></button>
           </div>
         </div>
 
@@ -658,19 +658,19 @@
         <div class="quiz-step" data-step="5">
           <p class="quiz-q" data-i18n="quiz_q5">Главная цель?</p>
           <div class="quiz-opts">
-            <button class="quiz-opt" data-val="income" data-i18n="qo5_1">💰 Стабильный доход</button>
-            <button class="quiz-opt" data-val="time" data-i18n="qo5_2">⏱ Освободить время</button>
-            <button class="quiz-opt" data-val="fame" data-i18n="qo5_3">⭐ Популярность</button>
+            <button class="quiz-opt" data-val="income"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> <span data-i18n="qo5_1">Стабильный доход</span></button>
+            <button class="quiz-opt" data-val="time"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> <span data-i18n="qo5_2">Освободить время</span></button>
+            <button class="quiz-opt" data-val="fame"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> <span data-i18n="qo5_3">Популярность</span></button>
           </div>
         </div>
 
         <div class="quiz-step" data-step="6">
           <p class="quiz-q" data-i18n="quiz_q6">Что тебя останавливает?</p>
           <div class="quiz-opts">
-            <button class="quiz-opt" data-val="safety" data-i18n="qo6_1">🔒 Боюсь за безопасность</button>
-            <button class="quiz-opt" data-val="terms" data-i18n="qo6_2">📋 Не знаю условий</button>
-            <button class="quiz-opt" data-val="result" data-i18n="qo6_3">🤔 Не уверена в результате</button>
-            <button class="quiz-opt" data-val="nothing" data-i18n="qo6_4">✅ Ничего не останавливает</button>
+            <button class="quiz-opt" data-val="safety"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> <span data-i18n="qo6_1">Боюсь за безопасность</span></button>
+            <button class="quiz-opt" data-val="terms"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> <span data-i18n="qo6_2">Не знаю условий</span></button>
+            <button class="quiz-opt" data-val="result"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> <span data-i18n="qo6_3">Не уверена в результате</span></button>
+            <button class="quiz-opt" data-val="nothing"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> <span data-i18n="qo6_4">Ничего не останавливает</span></button>
           </div>
         </div>
 
@@ -1271,11 +1271,11 @@
       quiz_step_word: 'Вопрос', quiz_step_of: 'из', quiz_result_label: 'Результат',
       quiz_q1: 'Какой у тебя типаж?', quiz_q2: 'Сколько зарабатываешь сейчас?', quiz_q3: 'Сколько часов в день тратишь на переписки?',
       quiz_q4: 'Сколько у тебя подписчиков?', quiz_q5: 'Главная цель?', quiz_q6: 'Что тебя останавливает?',
-      qo1_5: '✨ Другая', qo2_1: 'Не зарабатываю',
+      qo1_5: 'Другая', qo2_1: 'Не зарабатываю',
       qo3_1: 'Не переписываюсь', qo3_2: 'Меньше 1 часа', qo3_3: '1 – 3 часа', qo3_4: '3 – 5 часов', qo3_5: '5+ часов',
       qo4_1: 'Нет подписчиков',
-      qo5_1: '💰 Стабильный доход', qo5_2: '⏱ Освободить время', qo5_3: '⭐ Популярность',
-      qo6_1: '🔒 Боюсь за безопасность', qo6_2: '📋 Не знаю условий', qo6_3: '🤔 Не уверена в результате', qo6_4: '✅ Ничего не останавливает',
+      qo5_1: 'Стабильный доход', qo5_2: 'Освободить время', qo5_3: 'Популярность',
+      qo6_1: 'Боюсь за безопасность', qo6_2: 'Не знаю условий', qo6_3: 'Не уверена в результате', qo6_4: 'Ничего не останавливает',
       quiz_res_title: 'Твой прогноз с AXV Agency', quiz_res_now: 'Сейчас', quiz_res_now_sub: 'в месяц',
       quiz_res_month: 'За месяц', quiz_res_month_sub: 'с AXV Agency', quiz_res_3m: 'За 3 месяца', quiz_res_3m_sub: 'суммарно',
       quiz_cta: 'Написать в Telegram', quiz_restart: '← Пройти заново',
@@ -1360,11 +1360,11 @@
       quiz_step_word: 'Question', quiz_step_of: 'of', quiz_result_label: 'Result',
       quiz_q1: 'What\'s your type?', quiz_q2: 'How much are you earning now?', quiz_q3: 'How many hours a day do you spend on chats?',
       quiz_q4: 'How many subscribers do you have?', quiz_q5: 'Main goal?', quiz_q6: 'What\'s stopping you?',
-      qo1_5: '✨ Other', qo2_1: 'Not earning yet',
+      qo1_5: 'Other', qo2_1: 'Not earning yet',
       qo3_1: 'Don\'t chat', qo3_2: 'Less than 1 hour', qo3_3: '1 – 3 hours', qo3_4: '3 – 5 hours', qo3_5: '5+ hours',
       qo4_1: 'No subscribers',
-      qo5_1: '💰 Stable income', qo5_2: '⏱ Free up time', qo5_3: '⭐ Popularity',
-      qo6_1: '🔒 Safety concerns', qo6_2: '📋 Don\'t know the terms', qo6_3: '🤔 Unsure about results', qo6_4: '✅ Nothing stops me',
+      qo5_1: 'Stable income', qo5_2: 'Free up time', qo5_3: 'Popularity',
+      qo6_1: 'Safety concerns', qo6_2: 'Don\'t know the terms', qo6_3: 'Unsure about results', qo6_4: 'Nothing stops me',
       quiz_res_title: 'Your forecast with AXV Agency', quiz_res_now: 'Now', quiz_res_now_sub: 'per month',
       quiz_res_month: 'Per month', quiz_res_month_sub: 'with AXV Agency', quiz_res_3m: 'In 3 months', quiz_res_3m_sub: 'total',
       quiz_cta: 'Write on Telegram', quiz_restart: '← Take again',
@@ -1449,11 +1449,11 @@
       quiz_step_word: 'Питання', quiz_step_of: 'з', quiz_result_label: 'Результат',
       quiz_q1: 'Який у тебе типаж?', quiz_q2: 'Скільки заробляєш зараз?', quiz_q3: 'Скільки годин на день витрачаєш на переписки?',
       quiz_q4: 'Скільки у тебе підписників?', quiz_q5: 'Головна мета?', quiz_q6: 'Що тебе зупиняє?',
-      qo1_5: '✨ Інша', qo2_1: 'Не заробляю',
+      qo1_5: 'Інша', qo2_1: 'Не заробляю',
       qo3_1: 'Не листуюсь', qo3_2: 'Менше 1 години', qo3_3: '1 – 3 години', qo3_4: '3 – 5 годин', qo3_5: '5+ годин',
       qo4_1: 'Немає підписників',
-      qo5_1: '💰 Стабільний дохід', qo5_2: '⏱ Звільнити час', qo5_3: '⭐ Популярність',
-      qo6_1: '🔒 Боюсь за безпеку', qo6_2: '📋 Не знаю умов', qo6_3: '🤔 Не впевнена в результаті', qo6_4: '✅ Ніщо не зупиняє',
+      qo5_1: 'Стабільний дохід', qo5_2: 'Звільнити час', qo5_3: 'Популярність',
+      qo6_1: 'Боюсь за безпеку', qo6_2: 'Не знаю умов', qo6_3: 'Не впевнена в результаті', qo6_4: 'Ніщо не зупиняє',
       quiz_res_title: 'Твій прогноз з AXV Agency', quiz_res_now: 'Зараз', quiz_res_now_sub: 'на місяць',
       quiz_res_month: 'За місяць', quiz_res_month_sub: 'з AXV Agency', quiz_res_3m: 'За 3 місяці', quiz_res_3m_sub: 'сумарно',
       quiz_cta: 'Написати в Telegram', quiz_restart: '← Пройти знову',
