@@ -1,0 +1,9 @@
+node_modules/
+.DS_Store
+.claude/
+ui-ux-pro-max-skill-main/
+preview-bold.html
+preview-brutalism.html
+index-previous.html
+package-lock.json
+package.json

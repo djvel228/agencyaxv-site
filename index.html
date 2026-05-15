@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AXV Agency — Premium OnlyFans Management</title>
+  <meta name="description" content="Полный цикл управления OnlyFans. Ты создаёшь — мы развиваем." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --pink:        #F2769E;
+      --pink-light:  #F99AB8;
+      --pink-glow:   rgba(242,118,158,0.18);
+      --pink-border: rgba(242,118,158,0.25);
+      --pink-soft:   rgba(242,118,158,0.08);
+      --bg:          #080608;
+      --bg-2:        #0F0B0E;
+      --surface:     rgba(255,255,255,0.04);
+      --surface-h:   rgba(255,255,255,0.07);
+      --border:      rgba(255,255,255,0.07);
+      --border-p:    rgba(242,118,158,0.2);
+      --white:       #F5EEF2;
+      --muted:       #7A6B73;
+      --text:        #F5EEF2;
+      --ease:        cubic-bezier(0.16, 1, 0.3, 1);
+      --r:           14px;
+    }
+
+    body { background: var(--bg); color: var(--text); font-family: 'Montserrat', sans-serif; font-weight: 400; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-thumb { background: rgba(242,118,158,0.4); border-radius: 3px; }
+
+    .serif    { font-family: 'Cormorant', serif; }
+    .label    { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pink); }
+    .pink-text{ background: linear-gradient(135deg, var(--pink), var(--pink-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .blob     { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(80px); }
+
+    /* ── Buttons ── */
+    .btn-pink {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      background: linear-gradient(135deg, var(--pink), var(--pink-light));
+      color: #fff; font-family: 'Montserrat', sans-serif; font-size: 0.8125rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; padding: 17px 44px;
+      border-radius: 100px; border: none; text-decoration: none; cursor: pointer;
+      transition: transform 0.3s var(--ease), box-shadow 0.3s;
+      box-shadow: 0 4px 28px rgba(242,118,158,0.35);
+    }
+    .btn-pink:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(242,118,158,0.5); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      background: transparent; color: var(--white); font-family: 'Montserrat', sans-serif;
+      font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 16px 40px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.15);
+      text-decoration: none; transition: border-color 0.3s, background 0.3s, transform 0.3s var(--ease);
+    }
+    .btn-ghost:hover { border-color: var(--pink-border); background: var(--pink-soft); transform: translateY(-2px); }
+
+    /* ── Navbar ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 64px; display: flex; align-items: center; justify-content: space-between; transition: padding 0.4s var(--ease), background 0.4s, border-color 0.4s; border-bottom: 1px solid transparent; }
+    nav.scrolled { padding: 12px 64px; background: rgba(8,6,8,0.92); backdrop-filter: blur(20px); border-bottom-color: var(--border); }
+    .nav-logo { text-decoration: none; display: inline-flex; align-items: center; line-height: 1; }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+
+    /* ── Lang switcher ── */
+    .lang-switcher { display: flex; gap: 2px; }
+    .lang-switcher button { background: none; border: none; font-size: 0.625rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); cursor: pointer; padding: 5px 7px; border-radius: 6px; font-family: 'Montserrat', sans-serif; transition: color 0.2s, background 0.2s; }
+    .lang-switcher button:hover { color: var(--white); }
+    .lang-switcher button.active { color: var(--pink); background: var(--pink-soft); }
+
+    /* ── Mobile ── */
+    #burger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    #mob-nav { display: none; position: fixed; inset: 0; z-index: 99; background: var(--bg); flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+    #mob-nav.open { display: flex; }
+    #mob-nav a { font-family: 'Cormorant', serif; font-size: 2.5rem; font-weight: 300; color: var(--white); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+    #mob-nav a:hover { color: var(--pink); }
+    #mob-close { position: absolute; top: 24px; right: 24px; background: none; border: none; cursor: pointer; color: var(--muted); font-size: 1.5rem; }
+
+    /* ── Layout ── */
+    section { padding: 100px 64px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .d1{transition-delay:0ms!important} .d2{transition-delay:100ms!important} .d3{transition-delay:200ms!important} .d4{transition-delay:300ms!important} .d5{transition-delay:400ms!important}
+
+    /* ── Marquee ── */
+    .marquee-wrap { overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg-2); }
+    .marquee-track { display: flex; width: max-content; animation: ticker 32s linear infinite; }
+    .marquee-track span { font-family: 'Cormorant', serif; font-size: 1rem; font-style: italic; color: var(--muted); padding: 15px 32px; white-space: nowrap; }
+    .marquee-track span.dot { color: var(--pink); font-style: normal; padding: 15px 12px; font-size: 0.45rem; }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── Section header ── */
+    .sec-head { text-align: center; margin-bottom: 64px; }
+    .sec-h2 { font-family: 'Cormorant', serif; font-size: clamp(2.25rem, 4vw, 3.5rem); font-weight: 500; line-height: 1.15; margin-top: 12px; }
+
+    /* ── Pain cards ── */
+    .pain-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .pain-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--pink);
+      border-radius: var(--r);
+      padding: 28px 32px;
+      transition: background 0.3s, border-color 0.3s, transform 0.3s var(--ease);
+    }
+    .pain-card:hover { background: var(--surface-h); transform: translateY(-3px); }
+    .pain-quote { font-family: 'Cormorant', serif; font-size: 1.5rem; font-weight: 400; font-style: italic; line-height: 1.4; color: var(--white); margin-bottom: 0; }
+    .pain-icon { font-size: 1.5rem; margin-bottom: 14px; display: block; }
+    .pain-transition {
+      margin-top: 48px;
+      text-align: center;
+      font-family: 'Cormorant', serif;
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .pain-transition strong { font-style: normal; font-weight: 600; }
+
+    /* ── Services list ── */
+    .svc-list { display: flex; flex-direction: column; gap: 0; }
+    .svc-row {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 0 28px;
+      align-items: start;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .svc-row:first-child { border-top: 1px solid var(--border); }
+    .svc-row:hover .svc-row-icon { background: var(--pink); }
+    .svc-row:hover .svc-row-icon svg { stroke: #fff; }
+    .svc-row-icon {
+      width: 44px; height: 44px;
+      background: var(--pink-soft);
+      border: 1px solid var(--pink-border);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.25s;
+      margin-top: 2px;
+    }
+    .svc-row-title { font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+    .svc-row-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── Results ── */
+    .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); border-radius: var(--r); overflow: hidden; margin-bottom: 48px; }
+    .stat-cell { background: var(--bg-2); padding: 44px 40px; }
+    .stat-num { font-family: 'Cormorant', serif; font-size: clamp(3rem, 6vw, 5rem); font-weight: 600; line-height: 1; background: linear-gradient(135deg, var(--pink), var(--pink-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stat-label { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 8px; line-height: 1.5; }
+    .pink-div { width: 32px; height: 2px; background: var(--pink); border-radius: 2px; margin-bottom: 16px; }
+
+    /* Case cards */
+    .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
+    .case-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 28px;
+      transition: border-color 0.3s, transform 0.3s var(--ease), box-shadow 0.3s;
+    }
+    .case-card:hover { border-color: var(--border-p); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(242,118,158,0.1); }
+    .case-tag { font-size: 0.625rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pink); background: var(--pink-soft); border: 1px solid var(--pink-border); border-radius: 100px; padding: 4px 12px; display: inline-block; margin-bottom: 18px; }
+    .case-action { font-size: 0.875rem; color: var(--muted); line-height: 1.65; margin-bottom: 20px; }
+    .case-result { font-family: 'Cormorant', serif; font-size: 2rem; font-weight: 600; line-height: 1; background: linear-gradient(135deg, var(--pink), var(--pink-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .case-period { font-size: 0.7rem; color: var(--muted); margin-top: 4px; letter-spacing: 0.08em; }
+
+    /* Testimonial */
+    .testi-block {
+      background: var(--pink-soft);
+      border: 1px solid var(--pink-border);
+      border-radius: var(--r);
+      padding: 40px 48px;
+      position: relative;
+    }
+    .testi-quote-mark { font-family: 'Cormorant', serif; font-size: 5rem; line-height: 0.6; color: rgba(242,118,158,0.25); font-weight: 300; position: absolute; top: 28px; left: 40px; }
+    .testi-text { font-family: 'Cormorant', serif; font-size: 1.375rem; font-weight: 400; font-style: italic; line-height: 1.7; color: var(--white); padding-left: 16px; margin-bottom: 24px; }
+    .testi-author { display: flex; align-items: center; gap: 14px; }
+    .testi-avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--pink), var(--pink-light)); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; color: #fff; flex-shrink: 0; }
+    .testi-name { font-size: 0.875rem; font-weight: 600; color: var(--white); }
+    .testi-role { font-size: 0.7rem; color: var(--muted); margin-top: 2px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ── Calculator ── */
+    .calc-box { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 52px; position: relative; overflow: hidden; }
+    .calc-box::before { content: ''; position: absolute; top: -80px; right: -80px; width: 280px; height: 280px; border-radius: 50%; background: radial-gradient(circle, rgba(242,118,158,0.1), transparent 70%); pointer-events: none; }
+    .calc-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 5px; border-radius: 3px; background: rgba(255,255,255,0.1); outline: none; cursor: pointer; }
+    .calc-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, var(--pink), var(--pink-light)); cursor: pointer; box-shadow: 0 0 0 4px rgba(242,118,158,0.2), 0 2px 12px rgba(242,118,158,0.4); transition: transform 0.2s; }
+    .calc-slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
+    .calc-slider::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, var(--pink), var(--pink-light)); cursor: pointer; border: none; }
+    .track-wrap { position: relative; margin: 28px 0 10px; }
+    .track-fill { position: absolute; top: 50%; left: 0; height: 5px; border-radius: 3px; background: linear-gradient(90deg, var(--pink), var(--pink-light)); pointer-events: none; transform: translateY(-50%); }
+    .res-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px 18px; text-align: center; transition: border-color 0.3s, transform 0.3s var(--ease); }
+    .res-card:hover { border-color: var(--border-p); transform: translateY(-3px); }
+    .res-card.featured { background: linear-gradient(145deg, var(--pink), var(--pink-light)); border-color: transparent; }
+    .res-card.featured .res-label { color: rgba(255,255,255,0.75); }
+    .res-card.featured .res-amount { color: #fff; -webkit-text-fill-color: #fff; background: none; }
+    .res-card.featured .res-sub { color: rgba(255,255,255,0.65); }
+    .res-label { font-size: 0.625rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .res-amount { font-family: 'Cormorant', serif; font-size: 2.125rem; font-weight: 600; line-height: 1; background: linear-gradient(135deg, var(--pink), var(--pink-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .res-sub { font-size: 0.65rem; color: var(--muted); margin-top: 4px; }
+
+    /* ── Terms ── */
+    .terms-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .term-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 32px; transition: border-color 0.3s, transform 0.3s var(--ease); }
+    .term-card:hover { border-color: var(--border-p); transform: translateY(-3px); }
+    .term-icon { width: 40px; height: 40px; background: var(--pink-soft); border: 1px solid var(--pink-border); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .term-title { font-size: 0.875rem; font-weight: 700; color: var(--white); margin-bottom: 8px; letter-spacing: 0.04em; }
+    .term-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.7; }
+    .term-highlight { color: var(--pink); font-weight: 600; }
+
+    /* ── Process steps ── */
+    .steps-list { display: flex; flex-direction: column; max-width: 680px; margin: 0 auto; }
+    .step-row { display: grid; grid-template-columns: 52px 1fr; gap: 24px; align-items: flex-start; padding: 32px 0; border-bottom: 1px solid var(--border); }
+    .step-row:last-child { border-bottom: none; }
+    .step-badge { width: 44px; height: 44px; background: linear-gradient(135deg, var(--pink), var(--pink-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; color: #fff; flex-shrink: 0; margin-top: 2px; }
+    .step-title { font-size: 1.0625rem; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+    .step-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── Floating TG ── */
+    #tg-float { position: fixed; bottom: 28px; right: 28px; z-index: 90; width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, var(--pink), var(--pink-light)); display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 20px rgba(242,118,158,0.4); animation: tgPop 3s ease-in-out infinite; transition: transform 0.3s var(--ease), box-shadow 0.3s; }
+    #tg-float:hover { transform: scale(1.1) translateY(-2px); box-shadow: 0 8px 36px rgba(242,118,158,0.6); }
+    @keyframes tgPop { 0%,100%{box-shadow:0 4px 20px rgba(242,118,158,.4),0 0 0 0 rgba(242,118,158,.2)} 50%{box-shadow:0 4px 20px rgba(242,118,158,.4),0 0 0 10px rgba(242,118,158,0)} }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .pain-grid   { grid-template-columns: 1fr; }
+      .stats-row   { grid-template-columns: 1fr 1fr; }
+      .cases-grid  { grid-template-columns: 1fr; }
+      .terms-grid  { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      nav.scrolled { padding: 12px 20px; }
+      .nav-links, nav > .btn-pink { display: none; }
+      #burger { display: block; }
+      section { padding: 72px 20px; }
+      .stats-row { grid-template-columns: 1fr; }
+      .stat-cell { padding: 32px 24px; }
+      .calc-box { padding: 28px 20px; }
+      .calc-cols { grid-template-columns: 1fr !important; }
+      .calc-res-grid { grid-template-columns: 1fr !important; }
+      .testi-block { padding: 32px 24px; }
+      .hero-btns { flex-direction: column; align-items: stretch; }
+      .hero-btns a { text-align: center; }
+      .site-footer { flex-direction: column; align-items: flex-start !important; padding: 28px 20px !important; gap: 14px !important; }
+    }
+    /* ── Pain icon SVG ── */
+    .pain-icon-svg { display:block; margin-bottom:14px; }
+    .pain-icon-svg svg { display:block; }
+
+    /* ── Service cards ── */
+.svc-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.svc-card { background:var(--surface); border:1px solid var(--border); border-radius:16px; overflow:hidden; transition:border-color .3s, transform .3s var(--ease), box-shadow .3s; }
+.svc-card:hover { border-color:var(--pink-border); transform:translateY(-4px); box-shadow:0 16px 48px rgba(242,118,158,0.1); }
+.svc-card-top { background:linear-gradient(145deg,rgba(80,15,35,0.85),rgba(30,8,20,0.95)); padding:44px 32px; display:flex; align-items:center; justify-content:center; min-height:160px; }
+.svc-card-top svg { opacity:.85; transition:opacity .25s; }
+.svc-card:hover .svc-card-top svg { opacity:1; filter:drop-shadow(0 0 8px rgba(242,118,158,0.5)); }
+.svc-card-body { padding:28px 28px 32px; }
+.svc-card-title { font-family:'Cormorant',serif; font-size:1.5rem; font-weight:500; color:var(--white); line-height:1.25; margin-bottom:10px; }
+.svc-card-desc { font-size:.875rem; color:var(--muted); line-height:1.75; margin-bottom:20px; }
+.svc-card-div { width:28px; height:2px; background:var(--pink); border-radius:2px; margin-bottom:16px; }
+.svc-card-list { list-style:none; display:flex; flex-direction:column; gap:8px; }
+.svc-card-list li { display:flex; align-items:center; gap:10px; font-size:.8125rem; color:var(--muted); }
+.svc-card-list li svg { flex-shrink:0; }
+@media(max-width:960px){ .svc-cards{ grid-template-columns:repeat(2,1fr); } }
+@media(max-width:600px){ .svc-cards{ grid-template-columns:1fr; } }
+
+/* ── Quiz ── */
+    .quiz-q { font-family:'Cormorant',serif; font-size:clamp(1.25rem,3vw,1.75rem); font-weight:500; color:var(--white); line-height:1.4; margin-bottom:24px; }
+    .quiz-opts { display:flex; flex-direction:column; gap:10px; }
+    .quiz-opt {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:12px; padding:14px 20px; text-align:left;
+      font-family:'Montserrat',sans-serif; font-size:.875rem; color:var(--white);
+      cursor:pointer; transition:border-color .25s, background .25s, transform .2s var(--ease);
+    }
+    .quiz-opt:hover { border-color:var(--pink-border); background:var(--pink-soft); transform:translateX(4px); }
+    .quiz-opt.selected { border-color:var(--pink); background:rgba(242,118,158,0.12); }
+    .quiz-step { display:none; animation:quizIn .35s var(--ease) forwards; }
+    .quiz-step.active { display:block; }
+    @keyframes quizIn { from { opacity:0; transform:translateX(20px); } to { opacity:1; transform:translateX(0); } }
+
+    /* ── Carousel ── */
+    .carousel-wrap { }
+    .carousel-track { display:flex; gap:20px; overflow:hidden; }
+    .carousel-slide { flex:0 0 calc(33.333% - 14px); }
+    .carousel-dot { width:8px; height:8px; border-radius:50%; background:var(--border); border:none; cursor:pointer; transition:background .25s, transform .25s; padding:0; }
+    .carousel-dot.active { background:var(--pink); transform:scale(1.3); }
+
+    @media (max-width:960px) {
+      .carousel-slide { flex:0 0 calc(50% - 10px); }
+    }
+    @media (max-width:768px) {
+      .carousel-slide { flex:0 0 90%; }
+      #about .reveal[style*="grid-template-columns:1fr 1fr"] { grid-template-columns:1fr !important; }
+    }
+
+    /* ── FAQ ── */
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-item details summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 26px 0; }
+    .faq-item details summary::-webkit-details-marker { display: none; }
+    .faq-q { font-size: 1rem; font-weight: 500; color: var(--white); line-height: 1.4; }
+    .faq-plus { width: 20px; height: 20px; flex-shrink: 0; color: var(--pink); transition: transform 0.35s var(--ease); }
+    details[open] .faq-plus { transform: rotate(45deg); }
+    .faq-a { overflow: hidden; max-height: 0; opacity: 0; transition: max-height 0.4s var(--ease), opacity 0.35s, padding 0.35s; font-size: 0.9375rem; color: var(--muted); line-height: 1.85; }
+    details[open] .faq-a { max-height: 300px; opacity: 1; padding-bottom: 26px; }
+  </style>
+</head>
+<body>
+
+<!-- ── Floating TG button ── -->
+<a href="https://t.me/axv_agency" target="_blank" rel="noopener" id="tg-float" aria-label="Telegram">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+</a>
+
+<!-- ── Mobile menu ── -->
+<div id="mob-nav" role="dialog" aria-modal="true">
+  <button id="mob-close" aria-label="Close">✕</button>
+  <a href="#problem"  onclick="closeMob()">Проблема</a>
+  <a href="#services" onclick="closeMob()">Услуги</a>
+  <a href="#results"  onclick="closeMob()">Результаты</a>
+  <a href="#terms"    onclick="closeMob()">Условия</a>
+  <a href="#process"  onclick="closeMob()">Как начать</a>
+  <a href="#contact"  onclick="closeMob()" class="btn-pink" style="font-size:.875rem;">Обсудить сотрудничество</a>
+</div>
+
+<!-- ══ NAVBAR ══ -->
+<nav id="nav">
+  <!-- SVG Logo -->
+  <a href="#" class="nav-logo">
+    <svg width="130" height="38" viewBox="0 0 130 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="AXV Agency">
+      <defs>
+        <radialGradient id="lg" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#F2769E" stop-opacity="0.28"/>
+          <stop offset="100%" stop-color="#F2769E" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <ellipse cx="19" cy="19" rx="15" ry="15" fill="url(#lg)"/>
+      <polygon points="19,2 36,19 19,36 2,19" stroke="#F2769E" stroke-width="0.9" fill="rgba(242,118,158,0.04)"/>
+      <polygon points="19,8 30,19 19,30 8,19" stroke="#F2769E" stroke-width="0.65" fill="none" stroke-opacity="0.4"/>
+      <line x1="12" y1="29" x2="19" y2="11" stroke="#F2769E" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="26" y1="29" x2="19" y2="11" stroke="#F2769E" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="11" y1="14" x2="26.5" y2="28" stroke="#F2769E" stroke-width="1" stroke-linecap="round" stroke-opacity="0.72"/>
+      <line x1="27" y1="14" x2="11.5" y2="28" stroke="#F2769E" stroke-width="1" stroke-linecap="round" stroke-opacity="0.72"/>
+      <circle cx="0.8" cy="19" r="1.2" fill="#F2769E" opacity="0.5"/>
+      <circle cx="37.2" cy="19" r="1.2" fill="#F2769E" opacity="0.5"/>
+      <text x="46" y="23" font-family="Cormorant,Georgia,serif" font-size="19" font-weight="600" fill="#F2769E" letter-spacing="3">AXV</text>
+      <text x="47.5" y="33" font-family="Montserrat,Arial,sans-serif" font-size="5.5" font-weight="700" fill="#F2769E" letter-spacing="4" opacity="0.6">AGENCY</text>
+    </svg>
+  </a>
+
+  <div class="nav-links">
+    <a href="#problem">Проблема</a>
+    <a href="#services">Услуги</a>
+    <a href="#results">Результаты</a>
+    <a href="#terms">Условия</a>
+    <a href="#process">Как начать</a>
+  </div>
+
+  <div class="lang-switcher" id="lang-switcher">
+    <button onclick="setLang('ru')" data-lang="ru">RU</button>
+    <button onclick="setLang('en')" data-lang="en">EN</button>
+    <button onclick="setLang('uk')" data-lang="uk">UK</button>
+  </div>
+
+  <a href="#contact" class="btn-pink" style="padding:12px 28px;font-size:.6875rem;" data-i18n="nav_cta">Обсудить</a>
+  <button id="burger" aria-label="Menu">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--white)" stroke-width="1.8"><path d="M3 12h18M3 6h18M3 18h12"/></svg>
+  </button>
+</nav>
+
+
+<!-- ══ BLOCK 1 — HERO ══ -->
+<section id="hero" style="min-height:100vh;display:flex;align-items:center;padding-top:120px;padding-bottom:80px;position:relative;overflow:hidden;">
+  <div class="blob" style="width:650px;height:650px;top:-200px;right:-180px;background:rgba(242,118,158,0.11);"></div>
+  <div class="blob" style="width:400px;height:400px;bottom:-120px;left:-120px;background:rgba(242,118,158,0.07);"></div>
+  <div aria-hidden="true" style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.018) 1px,transparent 1px);background-size:72px 72px;pointer-events:none;"></div>
+
+  <div class="container" style="position:relative;z-index:1;width:100%;text-align:center;">
+
+    <div class="reveal d1" style="margin-bottom:28px;">
+      <span style="display:inline-flex;align-items:center;gap:8px;background:rgba(242,118,158,0.1);border:1px solid rgba(242,118,158,0.22);border-radius:100px;padding:7px 20px;font-size:.75rem;font-weight:600;color:var(--pink);letter-spacing:.08em;">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--pink);flex-shrink:0;animation:tgPop 2s infinite;"></span>
+        <span data-i18n="hero_badge">NOW ACCEPTING MODELS</span>
+      </span>
+    </div>
+
+    <h1 class="serif reveal d2" style="font-size:clamp(3rem,7vw,6rem);font-weight:500;line-height:1.05;letter-spacing:-0.01em;max-width:820px;margin:0 auto;" data-i18n-html="hero_h1">
+      Ты создаёшь.<br><em class="pink-text" style="font-style:italic;">Мы развиваем.</em>
+    </h1>
+
+    <p class="reveal d3" style="margin:28px auto 0;font-size:1.0625rem;line-height:1.8;color:var(--muted);max-width:520px;" data-i18n="hero_desc">
+      Полный цикл управления OnlyFans — трафик, переписки, контент-план и аналитика. Ты занимаешься съёмкой, мы берём на себя всё остальное.
+    </p>
+
+    <div class="reveal d4 hero-btns" style="display:flex;flex-wrap:wrap;gap:16px;margin-top:44px;justify-content:center;">
+      <a href="https://t.me/axv_agency" target="_blank" rel="noopener" class="btn-pink">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        <span data-i18n="hero_cta">Написать нам</span>
+      </a>
+      <a href="#results" class="btn-ghost" data-i18n="hero_cta2">Смотреть результаты</a>
+    </div>
+
+    <!-- Live counter -->
+<div class="reveal d5" style="margin-top:64px;">
+  <div style="display:inline-flex;flex-direction:column;align-items:center;gap:10px;background:rgba(242,118,158,0.06);border:1px solid rgba(242,118,158,0.18);border-radius:20px;padding:28px 48px;">
+    <div style="font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);" data-i18n="live_label">Суммарно наши модели заработали</div>
+    <div id="live-counter" class="serif pink-text" style="font-size:clamp(2rem,5vw,3.5rem);font-weight:600;line-height:1;letter-spacing:-0.01em;">$500,310</div>
+    <div style="display:flex;align-items:center;gap:6px;font-size:.7rem;color:var(--pink);opacity:.7;">
+      <span style="width:6px;height:6px;border-radius:50%;background:var(--pink);animation:tgPop 2s infinite;flex-shrink:0;"></span>
+      <span data-i18n="live_sub">и продолжает расти прямо сейчас</span>
+    </div>
+  </div>
+</div>
+
+  </div>
+</section>
+
+
+<!-- ── Marquee ── -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track" data-i18n-html="marquee_track">
+    <span>Управление аккаунтом</span><span class="dot">✦</span><span>Трафик и продвижение</span><span class="dot">✦</span><span>Чат-менеджмент 24/7</span><span class="dot">✦</span><span>PPV стратегия</span><span class="dot">✦</span><span>Контент-план</span><span class="dot">✦</span><span>Аналитика и отчёты</span><span class="dot">✦</span><span>Рост дохода ×3–×5</span><span class="dot">✦</span>
+    <span>Управление аккаунтом</span><span class="dot">✦</span><span>Трафик и продвижение</span><span class="dot">✦</span><span>Чат-менеджмент 24/7</span><span class="dot">✦</span><span>PPV стратегия</span><span class="dot">✦</span><span>Контент-план</span><span class="dot">✦</span><span>Аналитика и отчёты</span><span class="dot">✦</span><span>Рост дохода ×3–×5</span><span class="dot">✦</span>
+  </div>
+</div>
+
+
+<!-- ══ BLOCK 2 — ПРОБЛЕМА ══ -->
+<section id="problem" style="background:var(--bg-2);">
+  <div class="container">
+
+    <div class="sec-head reveal">
+      <h2 class="sec-h2" data-i18n-html="prob_title">
+        Если ты только планируешь начать<br>или работаешь одна и…
+      </h2>
+    </div>
+
+    <div class="pain-grid">
+
+      <div class="pain-card reveal d1">
+        <span class="pain-icon-svg">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+</span>
+        <p class="pain-quote" data-i18n="pain1">«Не понимаешь откуда брать подписчиков и как вообще стартовать»</p>
+      </div>
+
+      <div class="pain-card reveal d2">
+        <span class="pain-icon-svg">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+</span>
+        <p class="pain-quote" data-i18n="pain2">«Занимаешься всем одна и просто устала — съёмка, переписки, продвижение»</p>
+      </div>
+
+      <div class="pain-card reveal d3">
+        <span class="pain-icon-svg">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+</span>
+        <p class="pain-quote" data-i18n="pain3">«Доход нестабильный или слишком маленький относительно усилий»</p>
+      </div>
+
+      <div class="pain-card reveal d4">
+        <span class="pain-icon-svg">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+</span>
+        <p class="pain-quote" data-i18n="pain4">«Боишься за приватность и не знаешь можно ли вообще доверять агентству»</p>
+      </div>
+
+    </div>
+
+    <p class="pain-transition reveal" style="margin-top:56px;">
+      <span data-i18n="pain_transition">Именно для этого существует</span>
+      <strong class="pink-text"> AXV Agency.</strong>
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ══ BLOCK 3 — О НАС ══ -->
+<section id="about" style="background:var(--bg);overflow:hidden;">
+  <div class="container">
+
+    <div class="sec-head reveal">
+      <p class="label">О нас</p>
+      <h2 class="sec-h2">
+        Команда которая<br><em class="pink-text" style="font-style:italic;">живёт в твоей нише</em>
+      </h2>
+    </div>
+
+    <!-- Carousel -->
+    <div class="carousel-wrap reveal" style="position:relative;margin-bottom:56px;">
+      <div class="carousel-track" id="carousel-track">
+        <div class="carousel-slide">
+          <div style="width:100%;height:320px;background:linear-gradient(135deg,rgba(242,118,158,0.12),rgba(242,118,158,0.04));border-radius:16px;border:1px solid var(--pink-border);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1" opacity="0.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);">Фото команды</span>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <div style="width:100%;height:320px;background:linear-gradient(135deg,rgba(242,118,158,0.08),rgba(242,118,158,0.02));border-radius:16px;border:1px solid var(--pink-border);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1" opacity="0.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);">Рабочий процесс</span>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <div style="width:100%;height:320px;background:linear-gradient(135deg,rgba(242,118,158,0.1),rgba(242,118,158,0.03));border-radius:16px;border:1px solid var(--pink-border);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1" opacity="0.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);">Офис и команда</span>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <div style="width:100%;height:320px;background:linear-gradient(135deg,rgba(242,118,158,0.06),rgba(242,118,158,0.02));border-radius:16px;border:1px solid var(--pink-border);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1" opacity="0.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);">Результаты клиентов</span>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <div style="width:100%;height:320px;background:linear-gradient(135deg,rgba(242,118,158,0.09),rgba(242,118,158,0.03));border-radius:16px;border:1px solid var(--pink-border);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1" opacity="0.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);">Достижения</span>
+          </div>
+        </div>
+      </div>
+      <!-- Carousel controls -->
+      <div style="display:flex;justify-content:center;gap:8px;margin-top:20px;" id="carousel-dots"></div>
+    </div>
+
+    <!-- About text -->
+    <div class="reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;">
+      <div>
+        <h3 class="serif" style="font-size:clamp(1.5rem,3vw,2.25rem);font-weight:500;line-height:1.3;margin-bottom:20px;">Мы не просто агентство — <em class="pink-text" style="font-style:italic;">мы твой отдел роста</em></h3>
+        <p style="color:var(--muted);font-size:.9375rem;line-height:1.8;margin-bottom:16px;">AXV Agency основана людьми, которые сами строили аккаунты OnlyFans с нуля. Мы знаем эту нишу изнутри — её алгоритмы, психологию подписчиков и настоящие рычаги роста.</p>
+        <p style="color:var(--muted);font-size:.9375rem;line-height:1.8;">Наша команда — это чат-менеджеры, трафик-специалисты и стратеги, которые работают как единый организм на результат каждой модели.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="display:flex;align-items:flex-start;gap:16px;padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);">
+          <div style="width:36px;height:36px;background:var(--pink-soft);border:1px solid var(--pink-border);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.8"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div style="font-size:.875rem;font-weight:600;color:var(--white);margin-bottom:4px;">47+ активных моделей</div>
+            <div style="font-size:.8125rem;color:var(--muted);line-height:1.6;">Каждая — с персональной стратегией и выделенным чат-менеджером</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:16px;padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);">
+          <div style="width:36px;height:36px;background:var(--pink-soft);border:1px solid var(--pink-border);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <div>
+            <div style="font-size:.875rem;font-weight:600;color:var(--white);margin-bottom:4px;">Средний рост ×3.5 за 90 дней</div>
+            <div style="font-size:.8125rem;color:var(--muted);line-height:1.6;">Реальные данные по нашим моделям, не маркетинговые обещания</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:16px;padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);">
+          <div style="width:36px;height:36px;background:var(--pink-soft);border:1px solid var(--pink-border);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <div style="font-size:.875rem;font-weight:600;color:var(--white);margin-bottom:4px;">NDA с первого дня</div>
+            <div style="font-size:.8125rem;color:var(--muted);line-height:1.6;">Полная конфиденциальность, аккаунт всегда остаётся твоим</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ BLOCK 4 — КВИЗ ══ -->
+<section id="quiz" style="background:var(--bg-2);">
+  <div class="container" style="max-width:680px;">
+
+    <div class="sec-head reveal">
+      <p class="label">Персональный расчёт</p>
+      <h2 class="sec-h2">
+        Давай разберём<br><em class="pink-text" style="font-style:italic;">твою ситуацию</em>
+      </h2>
+      <p style="margin-top:12px;color:var(--muted);font-size:.9375rem;line-height:1.7;">6 вопросов — и ты увидишь реальный прогноз дохода под свою ситуацию.</p>
+    </div>
+
+    <div class="reveal">
+      <!-- Progress bar -->
+      <div style="margin-bottom:32px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <span id="quiz-step-label" style="font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);">Вопрос 1 из 6</span>
+          <span id="quiz-pct" style="font-size:.7rem;color:var(--pink);font-weight:600;">0%</span>
+        </div>
+        <div style="height:3px;background:rgba(255,255,255,0.07);border-radius:3px;overflow:hidden;">
+          <div id="quiz-bar" style="height:100%;width:0%;background:linear-gradient(90deg,var(--pink),var(--pink-light));border-radius:3px;transition:width .4s var(--ease);"></div>
+        </div>
+      </div>
+
+      <!-- Quiz box -->
+      <div id="quiz-box" style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:40px;min-height:320px;position:relative;overflow:hidden;">
+
+        <!-- Steps -->
+        <div class="quiz-step active" data-step="1">
+          <p class="quiz-q">Какой у тебя типаж?</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt" data-val="babyface">👶 Babyface</button>
+            <button class="quiz-opt" data-val="milf">💄 Milf</button>
+            <button class="quiz-opt" data-val="asian">🌸 Asian</button>
+            <button class="quiz-opt" data-val="girlnextdoor">🏡 Girl next door</button>
+            <button class="quiz-opt" data-val="other">✨ Другая</button>
+          </div>
+        </div>
+
+        <div class="quiz-step" data-step="2">
+          <p class="quiz-q">Сколько зарабатываешь сейчас?</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt" data-val="0">Не зарабатываю</button>
+            <button class="quiz-opt" data-val="250">До $500</button>
+            <button class="quiz-opt" data-val="1250">$500 – $2K</button>
+            <button class="quiz-opt" data-val="3500">$2K – $5K</button>
+            <button class="quiz-opt" data-val="7500">$5K+</button>
+          </div>
+        </div>
+
+        <div class="quiz-step" data-step="3">
+          <p class="quiz-q">Сколько часов в день тратишь на переписки?</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt" data-val="0">Не переписываюсь</button>
+            <button class="quiz-opt" data-val="0.5">Меньше 1 часа</button>
+            <button class="quiz-opt" data-val="2">1 – 3 часа</button>
+            <button class="quiz-opt" data-val="4">3 – 5 часов</button>
+            <button class="quiz-opt" data-val="6">5+ часов</button>
+          </div>
+        </div>
+
+        <div class="quiz-step" data-step="4">
+          <p class="quiz-q">Сколько у тебя подписчиков?</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt" data-val="0">Нет подписчиков</button>
+            <button class="quiz-opt" data-val="250">До 500</button>
+            <button class="quiz-opt" data-val="1250">500 – 2K</button>
+            <button class="quiz-opt" data-val="3500">2K – 5K</button>
+            <button class="quiz-opt" data-val="7500">5K+</button>
+          </div>
+        </div>
+
+        <div class="quiz-step" data-step="5">
+          <p class="quiz-q">Главная цель?</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt" data-val="income">💰 Стабильный доход</button>
+            <button class="quiz-opt" data-val="time">⏱ Освободить время</button>
+            <button class="quiz-opt" data-val="fame">⭐ Популярность</button>
+          </div>
+        </div>
+
+        <div class="quiz-step" data-step="6">
+          <p class="quiz-q">Что тебя останавливает?</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt" data-val="safety">🔒 Боюсь за безопасность</button>
+            <button class="quiz-opt" data-val="terms">📋 Не знаю условий</button>
+            <button class="quiz-opt" data-val="result">🤔 Не уверена в результате</button>
+            <button class="quiz-opt" data-val="nothing">✅ Ничего не останавливает</button>
+          </div>
+        </div>
+
+        <!-- Result -->
+        <div class="quiz-step" data-step="result" style="display:none;">
+          <p style="font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--pink);margin-bottom:20px;">Твой прогноз с AXV Agency</p>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px;">
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center;">
+              <div style="font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Сейчас</div>
+              <div id="quiz-res-now" class="serif" style="font-size:1.75rem;font-weight:600;color:var(--muted);">—</div>
+              <div style="font-size:.65rem;color:var(--muted);margin-top:4px;">в месяц</div>
+            </div>
+            <div style="background:linear-gradient(145deg,var(--pink),var(--pink-light));border-radius:12px;padding:18px;text-align:center;">
+              <div style="font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:8px;">За месяц</div>
+              <div id="quiz-res-90" class="serif" style="font-size:1.75rem;font-weight:600;color:#fff;">$0</div>
+              <div style="font-size:.65rem;color:rgba(255,255,255,.65);margin-top:4px;">с AXV Agency</div>
+            </div>
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center;">
+              <div style="font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">За 3 месяца</div>
+              <div id="quiz-res-6m" class="serif" style="font-size:1.75rem;font-weight:600;background:linear-gradient(135deg,var(--pink),var(--pink-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">$0</div>
+              <div style="font-size:.65rem;color:var(--muted);margin-top:4px;">суммарно</div>
+            </div>
+          </div>
+          <div id="quiz-insight" style="background:rgba(242,118,158,0.06);border:1px solid rgba(242,118,158,0.18);border-left:3px solid var(--pink);border-radius:12px;padding:18px 20px;font-size:.875rem;color:var(--muted);line-height:1.7;margin-bottom:24px;"></div>
+          <a href="https://t.me/axv_agency" target="_blank" rel="noopener" class="btn-pink" style="width:100%;justify-content:center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            Написать в Telegram
+          </a>
+          <button id="quiz-restart" style="display:block;width:100%;margin-top:12px;background:none;border:none;color:var(--muted);font-size:.8rem;cursor:pointer;font-family:'Montserrat',sans-serif;text-align:center;padding:8px;transition:color .2s;" onmouseover="this.style.color='var(--pink)'" onmouseout="this.style.color='var(--muted)'">← Пройти заново</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BLOCK 3 — УСЛУГИ ══ -->
+<section id="services" style="background:var(--bg);">
+  <div class="container">
+
+    <div class="sec-head reveal">
+      <p class="label" data-i18n="svc_label">Что мы делаем</p>
+      <h2 class="sec-h2" data-i18n-html="svc_title">
+        Everything your account needs<br><em class="pink-text" style="font-style:italic;">to reach the top</em>
+      </h2>
+    </div>
+
+    <div class="svc-cards">
+
+      <!-- Карточка 1: Управление аккаунтом -->
+      <div class="svc-card reveal d1">
+        <div class="svc-card-top">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+        </div>
+        <div class="svc-card-body">
+          <div class="svc-card-title" data-i18n="svc1_title">Управление аккаунтом</div>
+          <div class="svc-card-desc" data-i18n="svc1_desc">Полный стратегический контроль — ценообразование, PPV-календарь, контент-план, удержание подписчиков. Ведём твой аккаунт как бизнес.</div>
+          <div class="svc-card-div"></div>
+          <ul class="svc-card-list">
+            <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="svc1_f1">Оптимизация цен и подписок</span></li>
+            <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="svc1_f2">Аналитика дохода</span></li>
+            <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="svc1_f3">Удержание подписчиков</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Карточка 2: Трафик -->
+      <div class="svc-card reveal d2">
+        <div class="svc-card-top">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+        </div>
+        <div class="svc-card-body">
+          <div class="svc-card-title" data-i18n="svc2_title">Трафик и продвижение</div>
+          <div class="svc-card-desc" data-i18n="svc2_desc">Мультиплатформенный рост аудитории — Reddit, TikTok, Instagram, Twitter/X. Воронки которые приводят платящих подписчиков.</div>
+          <div class="svc-card-div"></div>
+          <ul class="svc-card-list">
+            <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="svc2_f1">Мультиплатформенные шаутауты</span></li>
+            <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="svc2_f2">Органические воронки роста</span></li>
+            <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="svc2_f3">Управление платной рекламой</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Карточка 3: Переписки -->
+      <div class="svc-card reveal d3">
+        <div class="svc-card-top">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </div>
+        <div class="svc-card-body">
+          <div class="svc-card-title" data-i18n="svc3_title">Чат-менеджмент</div>
+          <div class="svc-card-desc" data-i18n="svc3_desc">Профессиональные чаттеры 16+ часов ежедневно, обученные под твою персону. Максимум чаевых, PPV-продаж и лояльности фанатов.</div>
+          <div class="svc-card-div"></div>
+          <ul class="svc-card-list">
+            <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="svc3_f1">Покрытие 16 ч/день без выходных</span></li>
+            <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="svc3_f2">PPV-апселлы и чаевые</span></li>
+            <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="svc3_f3">Персона-гайд для чаттеров</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Карточка 4: Контент-план -->
+      <div class="svc-card reveal d4">
+        <div class="svc-card-top">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+        </div>
+        <div class="svc-card-body">
+          <div class="svc-card-title" data-i18n="svc4_title">Контент-план</div>
+          <div class="svc-card-desc" data-i18n="svc4_desc">Еженедельный план под алгоритм платформы — что снимать, когда публиковать, как оформлять для максимального охвата.</div>
+          <div class="svc-card-div"></div>
+          <ul class="svc-card-list">
+            <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="svc4_f1">Еженедельное расписание</span></li>
+            <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="svc4_f2">Оптимизация под алгоритм</span></li>
+            <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="svc4_f3">Идеи тем и форматов</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Карточка 5: Аналитика и стратегия -->
+      <div class="svc-card reveal d5" style="grid-column:span 1;">
+        <div class="svc-card-top">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+        <div class="svc-card-body">
+          <div class="svc-card-title" data-i18n="svc5_title">Аналитика и стратегия</div>
+          <div class="svc-card-desc" data-i18n="svc5_desc">Еженедельный отчёт по доходу, конверсии и росту. Работаем с ценообразованием и PPV-акциями для долгосрочного результата.</div>
+          <div class="svc-card-div"></div>
+          <ul class="svc-card-list">
+            <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="svc5_f1">Отчёт каждую неделю</span></li>
+            <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="svc5_f2">PPV-кампании и акции</span></li>
+            <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="svc5_f3">Долгосрочный рост дохода</span></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ BLOCK 4 — РЕЗУЛЬТАТЫ ══ -->
+<section id="results" style="background:var(--bg-2);">
+  <div class="container">
+
+    <div class="sec-head reveal">
+      <p class="label" data-i18n="res_label">Доказанные результаты</p>
+      <h2 class="sec-h2" data-i18n-html="res_title">
+        Наши цифры<br><em class="pink-text" style="font-style:italic;">говорят сами за себя</em>
+      </h2>
+    </div>
+
+    <!-- Big stats -->
+    <div class="stats-row reveal">
+      <div class="stat-cell">
+        <div class="pink-div"></div>
+        <div class="stat-num" data-stat="24" data-prefix="$" data-suffix="K+">$0K+</div>
+        <div class="stat-label" data-i18n="res_stat1">Рекорд одной модели<br>в месяц</div>
+      </div>
+      <div class="stat-cell">
+        <div class="pink-div"></div>
+        <div class="stat-num" data-stat="300" data-suffix="%">0%</div>
+        <div class="stat-label" data-i18n="res_stat2">Рост дохода<br>за первые 90 дней</div>
+      </div>
+      <div class="stat-cell">
+        <div class="pink-div"></div>
+        <div class="stat-num" data-stat="11" data-suffix="+">0+</div>
+        <div class="stat-label" data-i18n="res_stat3">Моделей под<br>управлением сейчас</div>
+      </div>
+    </div>
+
+    <!-- Case cards -->
+    <div class="cases-grid">
+
+      <div class="case-card reveal d1">
+        <div class="case-tag" data-i18n="case1_tag">Lifestyle · с нуля</div>
+        <p class="case-action" data-i18n="case1_action">Запустили трафик с Reddit + TikTok, выстроили чат-продажи PPV с первой недели.</p>
+        <div class="case-result" data-stat="4200" data-prefix="$">$0</div>
+        <div class="case-period" data-i18n="case1_period">за первый месяц</div>
+      </div>
+
+      <div class="case-card reveal d2">
+        <div class="case-tag" data-i18n="case2_tag">Fitness · был доход $800</div>
+        <p class="case-action" data-i18n="case2_action">Пересобрали стратегию ценообразования, подключили массовые PPV-рассылки и шаутауты.</p>
+        <div class="case-result" data-stat="6100" data-prefix="$">$0</div>
+        <div class="case-period" data-i18n="case2_period">через 60 дней</div>
+      </div>
+
+      <div class="case-card reveal d3">
+        <div class="case-tag" data-i18n="case3_tag">Cosplay · был доход $2K</div>
+        <p class="case-action" data-i18n="case3_action">Масштабировали платный трафик, внедрили систему удержания и апселлов через чат.</p>
+        <div class="case-result" data-stat="18000" data-prefix="$">$0</div>
+        <div class="case-period" data-i18n="case3_period">за 3 месяца работы</div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══ BLOCK 5 — УСЛОВИЯ ══ -->
+<section id="terms" style="background:var(--bg-2);">
+  <div class="container">
+
+    <div class="sec-head reveal">
+      <p class="label" data-i18n="terms_label">Условия сотрудничества</p>
+      <h2 class="sec-h2" data-i18n-html="terms_title">
+        Всё прозрачно.<br><em class="pink-text" style="font-style:italic;">Никаких сюрпризов.</em>
+      </h2>
+    </div>
+
+    <div class="terms-grid">
+
+      <div class="term-card reveal d1">
+        <div class="term-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.6"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="term-title" data-i18n="term1_title">Процент агентства</div>
+        <div class="term-desc" data-i18n-html="term1_desc">Работаем по модели <span class="term-highlight">revenue share — 25–30%</span> от дохода страницы. Зарабатываем только когда зарабатываешь ты. Никаких авансов и фиксированных платежей.</div>
+      </div>
+
+      <div class="term-card reveal d2">
+        <div class="term-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.6"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="term-title" data-i18n="term2_title">Что входит</div>
+        <div class="term-desc" data-i18n="term2_desc">Трафик и продвижение, чат-менеджмент 16ч/день, еженедельный контент-план, аналитика и отчёты, стратегия ценообразования и PPV.</div>
+      </div>
+
+      <div class="term-card reveal d3">
+        <div class="term-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.6"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div class="term-title" data-i18n="term3_title">Выплаты</div>
+        <div class="term-desc" data-i18n-html="term3_desc">Выплаты <span class="term-highlight">еженедельно</span> — каждую пятницу. Ты видишь полную аналитику платформы и всегда знаешь сколько заработала.</div>
+      </div>
+
+      <div class="term-card reveal d4">
+        <div class="term-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="term-title" data-i18n="term4_title">Прозрачность</div>
+        <div class="term-desc" data-i18n="term4_desc">Аккаунт остаётся твоим на 100%. Ты в любое время видишь всю аналитику, доступ к странице у тебя — мы работаем как твоя команда, а не вместо тебя.</div>
+      </div>
+
+      <div class="term-card reveal d5" style="grid-column: 1 / -1;">
+        <div class="term-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.6"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </div>
+        <div class="term-title" data-i18n="term5_title">Выход из сотрудничества</div>
+        <div class="term-desc" data-i18n-html="term5_desc">Уведомление за <span class="term-highlight">14 дней</span> — и мы расходимся без штрафов и претензий. Мы заинтересованы чтобы ты оставалась, поэтому строим отношения на результате, а не на договоре.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ BLOCK 6 — КАК НАЧАТЬ ══ -->
+<section id="process" style="background:var(--bg);">
+  <div class="container">
+
+    <div class="sec-head reveal">
+      <p class="label" data-i18n="proc_label">Как начать</p>
+      <h2 class="sec-h2" data-i18n-html="proc_title">
+        Четыре шага.<br><em class="pink-text" style="font-style:italic;">И ты уже растёшь.</em>
+      </h2>
+    </div>
+
+    <div class="steps-list">
+
+      <div class="step-row reveal d1">
+        <div class="step-badge">01</div>
+        <div>
+          <div class="step-title" data-i18n="step1_title">Пишешь нам в Telegram</div>
+          <div class="step-desc" data-i18n="step1_desc">Просто напиши — без длинных анкет. Скажи что ты модель и хочешь обсудить сотрудничество. Мы ответим в течение часа.</div>
+        </div>
+      </div>
+
+      <div class="step-row reveal d2">
+        <div class="step-badge">02</div>
+        <div>
+          <div class="step-title" data-i18n="step2_title">Бесплатная консультация</div>
+          <div class="step-desc" data-i18n="step2_desc">Созваниваемся и разбираем твою ситуацию — нишу, текущий доход, цели. Без продаж и давления. Честно говорим что реально для тебя.</div>
+        </div>
+      </div>
+
+      <div class="step-row reveal d3">
+        <div class="step-badge">03</div>
+        <div>
+          <div class="step-title" data-i18n="step3_title">Согласовываем условия и запускаемся</div>
+          <div class="step-desc" data-i18n="step3_desc">Подписываем NDA, обсуждаем процент, настраиваем команду и запускаем первые процессы. От созвона до старта — 48 часов.</div>
+        </div>
+      </div>
+
+      <div class="step-row reveal d4">
+        <div class="step-badge">04</div>
+        <div>
+          <div class="step-title" data-i18n="step4_title">Ты снимаешь — мы работаем</div>
+          <div class="step-desc" data-i18n="step4_desc">Ты занимаешься контентом. Мы берём на себя всё остальное — переписки, трафик, аналитику, стратегию. Каждую неделю — отчёт и выплата.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ FAQ ══ -->
+<section id="faq" style="background:var(--bg-2);">
+  <div class="container" style="max-width:780px;">
+
+    <div class="sec-head reveal">
+      <p class="label">FAQ</p>
+      <h2 class="sec-h2" data-i18n-html="faq_title">Ответы на<br><em class="pink-text" style="font-style:italic;">частые вопросы</em></h2>
+    </div>
+
+    <div class="reveal">
+      <div class="faq-item">
+        <details>
+          <summary>
+            <span class="faq-q" data-i18n="faq1_q">Как работает оплата? Вы берёте процент?</span>
+            <svg class="faq-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <p class="faq-a" data-i18n="faq1_a">Мы работаем по модели revenue share — зарабатываем только тогда, когда зарабатываешь ты. Никаких авансов и фиксированных платежей. Точный процент обсуждается индивидуально на первом звонке, исходя из твоего текущего дохода и целей.</p>
+        </details>
+      </div>
+      <div class="faq-item">
+        <details>
+          <summary>
+            <span class="faq-q" data-i18n="faq2_q">Я потеряю контроль над аккаунтом?</span>
+            <svg class="faq-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <p class="faq-a" data-i18n="faq2_a">Нет. Аккаунт остаётся твоим на 100%. Мы работаем как твоя команда, берём на себя ежедневные процессы, но весь стратегический и творческий контроль остаётся у тебя. Ты видишь всё через еженедельные отчёты.</p>
+        </details>
+      </div>
+      <div class="faq-item">
+        <details>
+          <summary>
+            <span class="faq-q" data-i18n="faq3_q">Нужен ли минимальный доход для старта?</span>
+            <svg class="faq-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <p class="faq-a" data-i18n="faq3_a">Мы работаем с моделями на разных этапах, включая старт с нуля. Главное — качество контента и желание расти. Напиши нам, и на первом звонке честно скажем, что реально в твоей ситуации.</p>
+        </details>
+      </div>
+      <div class="faq-item">
+        <details>
+          <summary>
+            <span class="faq-q" data-i18n="faq4_q">Кто будет общаться с моими подписчиками?</span>
+            <svg class="faq-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <p class="faq-a" data-i18n="faq4_a">Обученные чаттеры, которые работают под твою персону — по детальному гайду, который мы составляем вместе: твой стиль, фразы, темы и границы. Каждое сообщение выглядит как твоё.</p>
+        </details>
+      </div>
+      <div class="faq-item">
+        <details>
+          <summary>
+            <span class="faq-q" data-i18n="faq5_q">Как быстро я увижу результат?</span>
+            <svg class="faq-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <p class="faq-a" data-i18n="faq5_a">Большинство моделей видят измеримый рост уже в первые 2-4 недели. Значительный результат появляется ко второму месяцу — когда раскручиваются наши трафик-каналы. Мы ставим реалистичные ожидания с первого дня.</p>
+        </details>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══ BLOCK 7 — ФИНАЛЬНЫЙ CTA ══ -->
+<section id="contact" style="background:var(--bg-2);position:relative;overflow:hidden;">
+  <div class="blob" style="width:500px;height:500px;top:-150px;right:-150px;background:rgba(242,118,158,0.11);"></div>
+  <div class="blob" style="width:320px;height:320px;bottom:-100px;left:-100px;background:rgba(242,118,158,0.07);"></div>
+  <div aria-hidden="true" style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px);background-size:72px 72px;pointer-events:none;"></div>
+
+  <div class="container" style="position:relative;z-index:1;text-align:center;max-width:640px;">
+
+    <p class="label reveal" style="margin-bottom:16px;" data-i18n="cta_label">Готова обсудить сотрудничество?</p>
+
+    <h2 class="serif reveal d2" style="font-size:clamp(2.75rem,6vw,5rem);font-weight:500;line-height:1.1;" data-i18n-html="cta_title">
+      Давай строить<br><em class="pink-text" style="font-style:italic;">твою империю</em>
+    </h2>
+
+    <p class="serif reveal d3" style="font-size:1.125rem;font-weight:300;font-style:italic;color:var(--muted);margin:24px auto 48px;max-width:420px;line-height:1.7;" data-i18n="cta_desc">
+      Напиши нам — ответим в течение часа и проведём бесплатную консультацию.
+    </p>
+
+    <div class="reveal d4" style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
+      <a href="https://t.me/axv_agency" target="_blank" rel="noopener" class="btn-pink" style="font-size:.875rem;padding:18px 52px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        <span data-i18n="cta_btn">Написать в Telegram</span>
+      </a>
+    </div>
+
+    <div class="reveal d5" style="display:flex;flex-wrap:wrap;justify-content:center;gap:28px;margin-top:44px;">
+      <div style="display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--muted);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span data-i18n="trust1">NDA защита</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--muted);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span data-i18n="trust2">Ответ за час</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--muted);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        <span data-i18n="trust3">Бесплатная консультация</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══ FOOTER ══ -->
+<footer class="site-footer" style="padding:28px 64px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;background:var(--bg);">
+  <a href="#" class="nav-logo">
+    <svg width="110" height="32" viewBox="0 0 130 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs><radialGradient id="lgf" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#F2769E" stop-opacity="0.22"/><stop offset="100%" stop-color="#F2769E" stop-opacity="0"/></radialGradient></defs>
+      <ellipse cx="19" cy="19" rx="15" ry="15" fill="url(#lgf)"/>
+      <polygon points="19,2 36,19 19,36 2,19" stroke="#F2769E" stroke-width="0.9" fill="rgba(242,118,158,0.04)"/>
+      <polygon points="19,8 30,19 19,30 8,19" stroke="#F2769E" stroke-width="0.65" fill="none" stroke-opacity="0.4"/>
+      <line x1="12" y1="29" x2="19" y2="11" stroke="#F2769E" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="26" y1="29" x2="19" y2="11" stroke="#F2769E" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="11" y1="14" x2="26.5" y2="28" stroke="#F2769E" stroke-width="1" stroke-linecap="round" stroke-opacity="0.72"/>
+      <line x1="27" y1="14" x2="11.5" y2="28" stroke="#F2769E" stroke-width="1" stroke-linecap="round" stroke-opacity="0.72"/>
+      <circle cx="0.8" cy="19" r="1.2" fill="#F2769E" opacity="0.5"/>
+      <circle cx="37.2" cy="19" r="1.2" fill="#F2769E" opacity="0.5"/>
+      <text x="46" y="23" font-family="Cormorant,Georgia,serif" font-size="19" font-weight="600" fill="#F2769E" letter-spacing="3">AXV</text>
+      <text x="47.5" y="33" font-family="Montserrat,Arial,sans-serif" font-size="5.5" font-weight="700" fill="#F2769E" letter-spacing="4" opacity="0.6">AGENCY</text>
+    </svg>
+  </a>
+  <p style="font-size:.75rem;color:var(--muted);letter-spacing:.05em;" data-i18n="footer_copy">© 2025 AXV Agency. Все права защищены.</p>
+  <div style="display:flex;gap:20px;">
+    <a href="https://t.me/axv_agency" target="_blank" rel="noopener" style="font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--pink)'" onmouseout="this.style.color='var(--muted)'">Telegram</a>
+    <a href="mailto:hello@axv.agency" style="font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--pink)'" onmouseout="this.style.color='var(--muted)'">Email</a>
+  </div>
+</footer>
+
+
+<script>
+  // ── Navbar scroll ──
+  const navEl = document.getElementById('nav');
+  window.addEventListener('scroll', () => navEl.classList.toggle('scrolled', scrollY > 40), { passive: true });
+
+  // ── Mobile menu ──
+  const mob = document.getElementById('mob-nav');
+  document.getElementById('burger').onclick = () => { mob.classList.add('open'); document.body.style.overflow = 'hidden'; };
+  document.getElementById('mob-close').onclick = closeMob;
+  function closeMob() { mob.classList.remove('open'); document.body.style.overflow = ''; }
+
+  // ── Reveal on scroll ──
+  const revObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revObs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+  // ── Live counter ──
+  (function() {
+    const el = document.getElementById('live-counter');
+    if (!el) return;
+    const BASE = 500310;
+    const STORE_KEY = 'axv_counter_val';
+    const STORE_TS  = 'axv_counter_ts';
+    const INTERVAL  = 3000; // ms between ticks
+    const RATE_MIN  = 30;   // $ min per tick
+    const RATE_MAX  = 100;  // $ max per tick
+    // Average ticks per second ≈ 1/3, avg increment ≈ 65 → ~$1,872K/day
+    function fmtCounter(n) {
+      return '$' + n.toLocaleString('en-US');
+    }
+    // Load saved value; if none or less than base – start from base
+    const saved    = parseInt(localStorage.getItem(STORE_KEY), 10);
+    const savedTs  = parseInt(localStorage.getItem(STORE_TS), 10);
+    let val = (saved && saved >= BASE) ? saved : BASE;
+    // If we have a saved timestamp, simulate ticks that happened while the tab was closed
+    if (savedTs && val >= BASE) {
+      const elapsed = Date.now() - savedTs;
+      const missedTicks = Math.floor(elapsed / INTERVAL);
+      // Use average rate for missed ticks (don't go crazy on long absences – cap at 1 hour)
+      const cappedTicks = Math.min(missedTicks, 1200); // 1200 ticks = 1 hour
+      const avgIncrement = Math.round((RATE_MIN + RATE_MAX) / 2);
+      val += cappedTicks * avgIncrement;
+    }
+    // Save immediately so even a single visit bumps the value
+    localStorage.setItem(STORE_KEY, val);
+    localStorage.setItem(STORE_TS, Date.now());
+    el.textContent = fmtCounter(val);
+    setInterval(() => {
+      val += Math.floor(Math.random() * (RATE_MAX - RATE_MIN + 1)) + RATE_MIN;
+      el.textContent = fmtCounter(val);
+      localStorage.setItem(STORE_KEY, val);
+      localStorage.setItem(STORE_TS, Date.now());
+    }, INTERVAL);
+  })();
+
+  // ── Animated counters ──
+  const statObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const t = +el.dataset.stat, pre = el.dataset.prefix || '', suf = el.dataset.suffix || '';
+      const dur = 1800, t0 = performance.now(), ease = x => 1 - (1 - x) ** 3;
+      (function tick(now) {
+        const p = Math.min((now - t0) / dur, 1);
+        el.textContent = pre + Math.round(ease(p) * t) + suf;
+        if (p < 1) requestAnimationFrame(tick);
+      })(performance.now());
+      statObs.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-stat]').forEach(el => statObs.observe(el));
+
+  // ── Calculator (removed from page, keeping fmt helper) ──
+  function fmt(n) {
+    if (n >= 1000000) return '$' + (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+    if (n >= 1000)    return '$' + Math.round(n / 1000) + 'K';
+    return '$' + n.toLocaleString();
+  }
+
+  // ── Smooth anchors ──
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  // ══ i18n ══
+  const translations = {
+    ru: {
+      nav_cta: 'Обсудить',
+      hero_badge: 'NOW ACCEPTING MODELS',
+      hero_h1: 'Ты создаёшь.<br><em class="pink-text" style="font-style:italic;">Мы развиваем.</em>',
+      hero_desc: 'Полный цикл управления OnlyFans — трафик, переписки, контент-план и аналитика. Ты занимаешься съёмкой, мы берём на себя всё остальное.',
+      hero_cta: 'Написать нам', hero_cta2: 'Смотреть результаты',
+      live_label: 'Суммарно наши модели заработали', live_sub: 'и продолжает расти прямо сейчас',
+      stat1_label: 'Рекорд в месяц', stat2_label: 'Активных моделей', stat3_label: 'Рост за 90 дней', stat4_label: 'Поддержка',
+      marquee_track: '<span>Управление аккаунтом</span><span class="dot">✦</span><span>Трафик и продвижение</span><span class="dot">✦</span><span>Чат-менеджмент 24/7</span><span class="dot">✦</span><span>PPV стратегия</span><span class="dot">✦</span><span>Контент-план</span><span class="dot">✦</span><span>Аналитика и отчёты</span><span class="dot">✦</span><span>Рост дохода ×3–×5</span><span class="dot">✦</span><span>Управление аккаунтом</span><span class="dot">✦</span><span>Трафик и продвижение</span><span class="dot">✦</span><span>Чат-менеджмент 24/7</span><span class="dot">✦</span><span>PPV стратегия</span><span class="dot">✦</span><span>Контент-план</span><span class="dot">✦</span><span>Аналитика и отчёты</span><span class="dot">✦</span><span>Рост дохода ×3–×5</span><span class="dot">✦</span>',
+      prob_label: '', prob_title: 'Если ты только планируешь начать<br>или работаешь одна и…',
+      pain1: '«Не понимаешь откуда брать подписчиков и как вообще стартовать»', pain2: '«Занимаешься всем одна и просто устала — съёмка, переписки, продвижение»', pain3: '«Доход нестабильный или слишком маленький относительно усилий»', pain4: '«Боишься за приватность и не знаешь можно ли вообще доверять агентству»',
+      pain_transition: 'Именно для этого существует',
+      svc_label: 'Наши услуги', svc_title: 'Всё что нужно твоему аккаунту,<br><em class="pink-text" style="font-style:italic;">чтобы выйти в топ</em>',
+      svc1_title: 'Управление аккаунтом', svc1_desc: 'Полный стратегический контроль — ценообразование, PPV-календарь, контент-план, удержание подписчиков. Ведём твой аккаунт как бизнес.',
+      svc1_f1: 'Оптимизация цен и подписок', svc1_f2: 'Аналитика дохода', svc1_f3: 'Удержание подписчиков',
+      svc2_title: 'Трафик и продвижение', svc2_desc: 'Мультиплатформенный рост аудитории — Reddit, TikTok, Instagram, Twitter/X. Воронки которые приводят платящих подписчиков.',
+      svc2_f1: 'Мультиплатформенные шаутауты', svc2_f2: 'Органические воронки роста', svc2_f3: 'Управление платной рекламой',
+      svc3_title: 'Чат-менеджмент', svc3_desc: 'Профессиональные чаттеры 16+ часов ежедневно, обученные под твою персону. Максимум чаевых, PPV-продаж и лояльности фанатов.',
+      svc3_f1: 'Покрытие 16 ч/день без выходных', svc3_f2: 'PPV-апселлы и чаевые', svc3_f3: 'Персона-гайд для чаттеров',
+      svc4_title: 'Контент-план', svc4_desc: 'Еженедельный план под алгоритм платформы — что снимать, когда публиковать, как оформлять для максимального охвата.',
+      svc4_f1: 'Еженедельное расписание', svc4_f2: 'Оптимизация под алгоритм', svc4_f3: 'Идеи тем и форматов',
+      svc5_title: 'Аналитика и стратегия', svc5_desc: 'Еженедельный отчёт по доходу, конверсии и росту. Работаем с ценообразованием и PPV-акциями для долгосрочного результата.',
+      svc5_f1: 'Отчёт каждую неделю', svc5_f2: 'PPV-кампании и акции', svc5_f3: 'Долгосрочный рост дохода',
+      res_label: 'Доказанные результаты', res_title: 'Наши цифры<br><em class="pink-text" style="font-style:italic;">говорят сами за себя</em>',
+      res_stat1: 'Рекорд одной модели\nв месяц', res_stat2: 'Рост дохода\nза первые 90 дней', res_stat3: 'Моделей под\nуправлением сейчас',
+      case1_tag: 'Lifestyle · с нуля', case1_action: 'Запустили трафик с Reddit + TikTok, выстроили чат-продажи PPV с первой недели.', case1_period: 'за первый месяц',
+      case2_tag: 'Fitness · был доход $800', case2_action: 'Пересобрали стратегию ценообразования, подключили массовые PPV-рассылки и шаутауты.', case2_period: 'через 60 дней',
+      case3_tag: 'Cosplay · был доход $2K', case3_action: 'Масштабировали платный трафик, внедрили систему удержания и апселлов через чат.', case3_period: 'за 3 месяца работы',
+      testi_text: 'До AXV я зарабатывала $2К в месяц, делая абсолютно всё сама. Через три месяца работы с командой — $18К. Я просто снимаю контент, всё остальное они взяли на себя.',
+      testi_role: 'Модель · Top 0.4% · Cosplay ниша',
+      calc_label: 'Калькулятор дохода', calc_title: 'Сколько ты могла бы<br><em class="pink-text" style="font-style:italic;">зарабатывать с нами?</em>',
+      calc_desc: 'Передвигай слайдер — покажем реалистичный прогноз на основе данных наших моделей.',
+      calc_sub_label: 'Твои подписчики', calc_unit: 'подписчиков',
+      calc_note_text: 'При 5 000 подписчиков модель под нашим управлением зарабатывает <strong style="color:var(--pink);">~$10 000/мес</strong>. Это реальные данные с наших аккаунтов.',
+      calc_without: 'Без агентства', calc_with: 'С AXV Agency', calc_proj_label: 'Прогноз с AXV Agency',
+      calc_monthly: 'В месяц', calc_3months: '3 месяца', calc_annual: 'В год', calc_per_month: 'в месяц', calc_total: 'итого', calc_per_year: 'в год',
+      calc_btn: 'Обсудить мой потенциал',
+      terms_label: 'Условия сотрудничества', terms_title: 'Всё прозрачно.<br><em class="pink-text" style="font-style:italic;">Никаких сюрпризов.</em>',
+      term1_title: 'Процент агентства', term1_desc: 'Работаем по модели <span class="term-highlight">revenue share — 25–30%</span> от дохода страницы. Зарабатываем только когда зарабатываешь ты. Никаких авансов и фиксированных платежей.',
+      term2_title: 'Что входит', term2_desc: 'Трафик и продвижение, чат-менеджмент 16ч/день, еженедельный контент-план, аналитика и отчёты, стратегия ценообразования и PPV.',
+      term3_title: 'Выплаты', term3_desc: 'Выплаты <span class="term-highlight">еженедельно</span> — каждую пятницу. Ты видишь полную аналитику платформы и всегда знаешь сколько заработала.',
+      term4_title: 'Прозрачность', term4_desc: 'Аккаунт остаётся твоим на 100%. Ты в любое время видишь всю аналитику, доступ к странице у тебя — мы работаем как твоя команда, а не вместо тебя.',
+      term5_title: 'Выход из сотрудничества', term5_desc: 'Уведомление за <span class="term-highlight">14 дней</span> — и мы расходимся без штрафов и претензий. Мы заинтересованы чтобы ты оставалась, поэтому строим отношения на результате, а не на договоре.',
+      proc_label: 'Как начать', proc_title: 'Четыре шага.<br><em class="pink-text" style="font-style:italic;">И ты уже растёшь.</em>',
+      step1_title: 'Пишешь нам в Telegram', step1_desc: 'Просто напиши — без длинных анкет. Скажи что ты модель и хочешь обсудить сотрудничество. Мы ответим в течение часа.',
+      step2_title: 'Бесплатная консультация', step2_desc: 'Созваниваемся и разбираем твою ситуацию — нишу, текущий доход, цели. Без продаж и давления. Честно говорим что реально для тебя.',
+      step3_title: 'Согласовываем условия и запускаемся', step3_desc: 'Подписываем NDA, обсуждаем процент, настраиваем команду и запускаем первые процессы. От созвона до старта — 48 часов.',
+      step4_title: 'Ты снимаешь — мы работаем', step4_desc: 'Ты занимаешься контентом. Мы берём на себя всё остальное — переписки, трафик, аналитику, стратегию. Каждую неделю — отчёт и выплата.',
+      faq_title: 'Ответы на<br><em class="pink-text" style="font-style:italic;">частые вопросы</em>',
+      faq1_q: 'Как работает оплата? Вы берёте процент?',
+      faq1_a: 'Мы работаем по модели revenue share — зарабатываем только тогда, когда зарабатываешь ты. Никаких авансов и фиксированных платежей. Точный процент обсуждается индивидуально на первом звонке, исходя из твоего текущего дохода и целей.',
+      faq2_q: 'Я потеряю контроль над аккаунтом?',
+      faq2_a: 'Нет. Аккаунт остаётся твоим на 100%. Мы работаем как твоя команда, берём на себя ежедневные процессы, но весь стратегический и творческий контроль остаётся у тебя. Ты видишь всё через еженедельные отчёты.',
+      faq3_q: 'Нужен ли минимальный доход для старта?',
+      faq3_a: 'Мы работаем с моделями на разных этапах, включая старт с нуля. Главное — качество контента и желание расти. Напиши нам, и на первом звонке честно скажем, что реально в твоей ситуации.',
+      faq4_q: 'Кто будет общаться с моими подписчиками?',
+      faq4_a: 'Обученные чаттеры, которые работают под твою персону — по детальному гайду, который мы составляем вместе: твой стиль, фразы, темы и границы. Каждое сообщение выглядит как твоё.',
+      faq5_q: 'Как быстро я увижу результат?',
+      faq5_a: 'Большинство моделей видят измеримый рост уже в первые 2-4 недели. Значительный результат появляется ко второму месяцу — когда раскручиваются наши трафик-каналы. Мы ставим реалистичные ожидания с первого дня.',
+      cta_label: 'Готова обсудить сотрудничество?', cta_title: 'Давай строить<br><em class="pink-text" style="font-style:italic;">твою империю</em>',
+      cta_desc: 'Напиши нам — ответим в течение часа и проведём бесплатную консультацию.',
+      cta_btn: 'Написать в Telegram',
+      trust1: 'NDA защита', trust2: 'Ответ за час', trust3: 'Бесплатная консультация',
+      footer_copy: '© 2025 AXV Agency. Все права защищены.',
+    },
+    en: {
+      nav_cta: 'Apply',
+      hero_badge: 'NOW ACCEPTING MODELS',
+      hero_h1: 'You create.<br><em class="pink-text" style="font-style:italic;">We grow.</em>',
+      hero_desc: 'Full-cycle OnlyFans management — traffic, chat, content plan and analytics. You focus on content, we handle everything else.',
+      hero_cta: 'Write to us', hero_cta2: 'See Results',
+      live_label: 'Our models have earned in total', live_sub: 'and growing right now',
+      stat1_label: 'Record / month', stat2_label: 'Active models', stat3_label: 'Growth in 90 days', stat4_label: 'Support',
+      marquee_track: '<span>Account Management</span><span class="dot">✦</span><span>Traffic & Promotion</span><span class="dot">✦</span><span>Chat Management 24/7</span><span class="dot">✦</span><span>PPV Strategy</span><span class="dot">✦</span><span>Content Plan</span><span class="dot">✦</span><span>Analytics & Reports</span><span class="dot">✦</span><span>Revenue Growth ×3–×5</span><span class="dot">✦</span><span>Account Management</span><span class="dot">✦</span><span>Traffic & Promotion</span><span class="dot">✦</span><span>Chat Management 24/7</span><span class="dot">✦</span><span>PPV Strategy</span><span class="dot">✦</span><span>Content Plan</span><span class="dot">✦</span><span>Analytics & Reports</span><span class="dot">✦</span><span>Revenue Growth ×3–×5</span><span class="dot">✦</span>',
+      prob_label: '', prob_title: 'Whether you\'re just starting out<br>or working alone and…',
+      pain1: '"You don\'t know where to find subscribers or how to start"', pain2: '"You handle everything yourself and you\'re simply exhausted"', pain3: '"Income is unstable or too small for the effort you put in"', pain4: '"You\'re worried about privacy and don\'t know if you can trust an agency"',
+      pain_transition: 'That\'s exactly why',
+      svc_label: 'Our services', svc_title: 'Everything your account needs<br><em class="pink-text" style="font-style:italic;">to reach the top</em>',
+      svc1_title: 'Account Management', svc1_desc: 'Full strategic control — pricing, PPV calendar, content planning, subscriber retention. We treat your account like a business.',
+      svc1_f1: 'Pricing optimization', svc1_f2: 'Revenue analytics', svc1_f3: 'Subscriber retention',
+      svc2_title: 'Traffic & Promotion', svc2_desc: 'Multi-platform audience growth — Reddit, TikTok, Instagram, Twitter/X. Funnels that bring subscribers who actually pay.',
+      svc2_f1: 'Multi-platform shoutouts', svc2_f2: 'Organic growth funnels', svc2_f3: 'Paid ads management',
+      svc3_title: 'Chat Management', svc3_desc: 'Professional chatters 16+ hours daily, trained on your persona. Maximized tips, PPV sales, and fan loyalty without your time.',
+      svc3_f1: '16h/day coverage', svc3_f2: 'PPV upsells & tips', svc3_f3: 'Persona guide',
+      svc4_title: 'Content Plan', svc4_desc: 'Weekly schedule aligned with platform algorithms — what to shoot, when to post, how to present for maximum reach.',
+      svc4_f1: 'Weekly schedule', svc4_f2: 'Algorithm optimization', svc4_f3: 'Ideas & formats',
+      svc5_title: 'Analytics & Strategy', svc5_desc: 'Weekly reports on revenue, conversion and growth. We work on pricing and PPV campaigns for long-term results.',
+      svc5_f1: 'Weekly reports', svc5_f2: 'PPV campaigns & promos', svc5_f3: 'Long-term revenue growth',
+      res_label: 'Proven results', res_title: 'Our numbers<br><em class="pink-text" style="font-style:italic;">speak for themselves</em>',
+      res_stat1: 'Record for one model\nper month', res_stat2: 'Revenue growth\nin first 90 days', res_stat3: 'Models under\nactive management',
+      case1_tag: 'Lifestyle · from zero', case1_action: 'Launched Reddit + TikTok traffic, built PPV chat sales from week one.', case1_period: 'in the first month',
+      case2_tag: 'Fitness · had $800 revenue', case2_action: 'Rebuilt pricing strategy, launched mass PPV campaigns and shoutouts.', case2_period: 'after 60 days',
+      case3_tag: 'Cosplay · had $2K revenue', case3_action: 'Scaled paid traffic, implemented retention and upsell system via chat.', case3_period: 'over 3 months',
+      testi_text: 'Before AXV I was making $2K a month doing everything alone. After three months with the team — $18K. I just shoot content, they handle everything else.',
+      testi_role: 'Model · Top 0.4% · Cosplay niche',
+      calc_label: 'Earnings Calculator', calc_title: 'How much could<br><em class="pink-text" style="font-style:italic;">you earn with us?</em>',
+      calc_desc: 'Move the slider — see realistic projections based on our managed accounts.',
+      calc_sub_label: 'Your followers', calc_unit: 'followers',
+      calc_note_text: 'With 5,000 followers a model under our management earns <strong style="color:var(--pink);">~$10,000/mo</strong>. Real data from our accounts.',
+      calc_without: 'Without agency', calc_with: 'With AXV Agency', calc_proj_label: 'Projection with AXV Agency',
+      calc_monthly: 'Monthly', calc_3months: '3 Months', calc_annual: 'Annual', calc_per_month: 'per month', calc_total: 'total', calc_per_year: 'per year',
+      calc_btn: 'Discuss My Potential',
+      terms_label: 'Partnership terms', terms_title: 'Fully transparent.<br><em class="pink-text" style="font-style:italic;">No surprises.</em>',
+      term1_title: 'Agency fee', term1_desc: 'We work on <span class="term-highlight">revenue share — 25–30%</span> of page income. We earn only when you earn. No upfront fees or fixed payments.',
+      term2_title: 'What\'s included', term2_desc: 'Traffic & promotion, chat management 16h/day, weekly content plan, analytics & reports, pricing and PPV strategy.',
+      term3_title: 'Payouts', term3_desc: 'Payouts <span class="term-highlight">every week</span> — every Friday. You see full platform analytics and always know how much you earned.',
+      term4_title: 'Transparency', term4_desc: 'Your account stays 100% yours. You can view all analytics at any time — we work as your team, not instead of you.',
+      term5_title: 'Exit policy', term5_desc: '<span class="term-highlight">14 days notice</span> — and we part ways without penalties or disputes. We\'re incentivised to keep you, so we build on results, not contracts.',
+      proc_label: 'How to start', proc_title: 'Four steps.<br><em class="pink-text" style="font-style:italic;">And you\'re already growing.</em>',
+      step1_title: 'Write us on Telegram', step1_desc: 'Just message us — no long forms. Say you\'re a model and want to discuss working together. We reply within an hour.',
+      step2_title: 'Free consultation', step2_desc: 'We get on a call and discuss your situation — niche, current income, goals. No sales pressure. Honest assessment.',
+      step3_title: 'Agree on terms and launch', step3_desc: 'We sign an NDA, agree on the split, set up your team and launch first processes. From call to start — 48 hours.',
+      step4_title: 'You shoot — we work', step4_desc: 'You focus on content. We handle everything else — DMs, traffic, analytics, strategy. Every week — a report and a payout.',
+      faq_title: 'Answers to<br><em class="pink-text" style="font-style:italic;">common questions</em>',
+      faq1_q: 'How does payment work? Do you take a percentage?',
+      faq1_a: 'We work on a revenue-share model — we earn only when you earn. No upfront fees, no fixed costs. The exact split is discussed individually during the onboarding call, based on your current revenue and goals.',
+      faq2_q: 'Do I lose control of my account?',
+      faq2_a: 'No. Your account stays 100% yours. We operate as your dedicated team, handling daily operations while you retain full creative and strategic control. You see everything through weekly reports.',
+      faq3_q: 'Is there a minimum revenue required to start?',
+      faq3_a: 'We work with models at various stages, including those starting from zero. What matters most is content quality and motivation to grow. Apply — we\'ll give you an honest evaluation on the call.',
+      faq4_q: 'Who will be talking to my subscribers?',
+      faq4_a: 'Trained chatters who work under your persona, guided by a detailed profile we build together — your tone, phrases, topics, and boundaries. Every message feels authentic and like you.',
+      faq5_q: 'How fast will I see results?',
+      faq5_a: 'Most models see measurable growth within the first 2-4 weeks. Significant results appear by month two as our traffic channels build momentum. We set realistic targets from day one.',
+      cta_label: 'Ready to discuss?', cta_title: 'Let\'s build<br><em class="pink-text" style="font-style:italic;">your empire</em>',
+      cta_desc: 'Write to us — we\'ll reply within an hour and run a free consultation.',
+      cta_btn: 'Write on Telegram',
+      trust1: 'NDA Protection', trust2: 'Reply within 1 hour', trust3: 'Free consultation',
+      footer_copy: '© 2025 AXV Agency. All rights reserved.',
+    },
+    uk: {
+      nav_cta: 'Обговорити',
+      hero_badge: 'NOW ACCEPTING MODELS',
+      hero_h1: 'Ти створюєш.<br><em class="pink-text" style="font-style:italic;">Ми розвиваємо.</em>',
+      hero_desc: 'Повний цикл управління OnlyFans — трафік, переписки, контент-план та аналітика. Ти займаєшся зйомкою, ми беремо на себе все інше.',
+      hero_cta: 'Написати нам', hero_cta2: 'Дивитися результати',
+      live_label: 'Сумарно наші моделі заробили', live_sub: 'і продовжує зростати прямо зараз',
+      stat1_label: 'Рекорд на місяць', stat2_label: 'Активних моделей', stat3_label: 'Ріст за 90 днів', stat4_label: 'Підтримка',
+      marquee_track: '<span>Управління акаунтом</span><span class="dot">✦</span><span>Трафік і просування</span><span class="dot">✦</span><span>Чат-менеджмент 24/7</span><span class="dot">✦</span><span>PPV стратегія</span><span class="dot">✦</span><span>Контент-план</span><span class="dot">✦</span><span>Аналітика і звіти</span><span class="dot">✦</span><span>Ріст доходу ×3–×5</span><span class="dot">✦</span><span>Управління акаунтом</span><span class="dot">✦</span><span>Трафік і просування</span><span class="dot">✦</span><span>Чат-менеджмент 24/7</span><span class="dot">✦</span><span>PPV стратегія</span><span class="dot">✦</span><span>Контент-план</span><span class="dot">✦</span><span>Аналітика і звіти</span><span class="dot">✦</span><span>Ріст доходу ×3–×5</span><span class="dot">✦</span>',
+      prob_label: '', prob_title: 'Якщо ти тільки плануєш почати<br>або працюєш одна і…',
+      pain1: '«Не розумієш звідки брати підписників і як взагалі стартувати»', pain2: '«Займаєшся всім одна і просто втомилась — зйомка, переписки, просування»', pain3: '«Дохід нестабільний або занадто малий відносно зусиль»', pain4: '«Боїшся за приватність і не знаєш чи можна довіряти агентству»',
+      pain_transition: 'Саме для цього існує',
+      svc_label: 'Наші послуги', svc_title: 'Все що потрібно твоєму акаунту,<br><em class="pink-text" style="font-style:italic;">щоб вийти в топ</em>',
+      svc1_title: 'Управління акаунтом', svc1_desc: 'Повний стратегічний контроль — ціноутворення, PPV-календар, контент-план, утримання підписників. Ведемо твій акаунт як бізнес.',
+      svc1_f1: 'Оптимізація цін і підписок', svc1_f2: 'Аналітика доходу', svc1_f3: 'Утримання підписників',
+      svc2_title: 'Трафік і просування', svc2_desc: 'Мультиплатформенне зростання аудиторії — Reddit, TikTok, Instagram, Twitter/X. Воронки що приводять платящих підписників.',
+      svc2_f1: 'Мультиплатформенні шаутаути', svc2_f2: 'Органічні воронки зростання', svc2_f3: 'Управління платною рекламою',
+      svc3_title: 'Чат-менеджмент', svc3_desc: 'Професійні чаттери 16+ годин щодня, навчені під твою персону. Максимум чайових, PPV-продажів і лояльності фанатів.',
+      svc3_f1: 'Покриття 16 год/день без вихідних', svc3_f2: 'PPV-апселли та чайові', svc3_f3: 'Персона-гайд для чаттерів',
+      svc4_title: 'Контент-план', svc4_desc: 'Щотижневий план під алгоритм платформи — що знімати, коли публікувати, як оформлювати для максимального охоплення.',
+      svc4_f1: 'Щотижневий розклад', svc4_f2: 'Оптимізація під алгоритм', svc4_f3: 'Ідеї тем і форматів',
+      svc5_title: 'Аналітика і стратегія', svc5_desc: 'Щотижневий звіт по доходу, конверсії та зростанню. Працюємо з ціноутворенням і PPV-акціями для довгострокового результату.',
+      svc5_f1: 'Звіт щотижня', svc5_f2: 'PPV-кампанії та акції', svc5_f3: 'Довгострокове зростання доходу',
+      res_label: 'Доведені результати', res_title: 'Наші цифри<br><em class="pink-text" style="font-style:italic;">говорять самі за себе</em>',
+      res_stat1: 'Рекорд однієї моделі\nна місяць', res_stat2: 'Ріст доходу\nза перші 90 днів', res_stat3: 'Моделей під\nактивним управлінням',
+      case1_tag: 'Lifestyle · з нуля', case1_action: 'Запустили трафік з Reddit + TikTok, вибудували чат-продажі PPV з першого тижня.', case1_period: 'за перший місяць',
+      case2_tag: 'Fitness · був дохід $800', case2_action: 'Пересобрали стратегію ціноутворення, підключили масові PPV-розсилки та шаутаути.', case2_period: 'через 60 днів',
+      case3_tag: 'Cosplay · був дохід $2K', case3_action: 'Масштабували платний трафік, впровадили систему утримання та апселів через чат.', case3_period: 'за 3 місяці роботи',
+      testi_text: 'До AXV я заробляла $2К на місяць, роблячи абсолютно все сама. Через три місяці роботи з командою — $18К. Я просто знімаю контент, все інше вони взяли на себе.',
+      testi_role: 'Модель · Top 0.4% · Cosplay ніша',
+      calc_label: 'Калькулятор доходу', calc_title: 'Скільки ти могла б<br><em class="pink-text" style="font-style:italic;">заробляти з нами?</em>',
+      calc_desc: 'Пересувай слайдер — покажемо реалістичний прогноз на основі даних наших моделей.',
+      calc_sub_label: 'Твої підписники', calc_unit: 'підписників',
+      calc_note_text: 'При 5 000 підписників модель під нашим управлінням заробляє <strong style="color:var(--pink);">~$10 000/міс</strong>. Реальні дані з наших акаунтів.',
+      calc_without: 'Без агентства', calc_with: 'З AXV Agency', calc_proj_label: 'Прогноз з AXV Agency',
+      calc_monthly: 'На місяць', calc_3months: '3 місяці', calc_annual: 'На рік', calc_per_month: 'на місяць', calc_total: 'разом', calc_per_year: 'на рік',
+      calc_btn: 'Обговорити мій потенціал',
+      terms_label: 'Умови співпраці', terms_title: 'Все прозоро.<br><em class="pink-text" style="font-style:italic;">Ніяких сюрпризів.</em>',
+      term1_title: 'Відсоток агентства', term1_desc: 'Працюємо за моделлю <span class="term-highlight">revenue share — 25–30%</span> від доходу сторінки. Заробляємо лише коли заробляєш ти.',
+      term2_title: 'Що входить', term2_desc: 'Трафік і просування, чат-менеджмент 16год/день, щотижневий контент-план, аналітика і звіти, стратегія ціноутворення та PPV.',
+      term3_title: 'Виплати', term3_desc: 'Виплати <span class="term-highlight">щотижня</span> — кожної п\'ятниці. Ти бачиш повну аналітику платформи і завжди знаєш скільки заробила.',
+      term4_title: 'Прозорість', term4_desc: 'Акаунт залишається твоїм на 100%. Ти в будь-який час бачиш всю аналітику — ми працюємо як твоя команда, а не замість тебе.',
+      term5_title: 'Вихід зі співпраці', term5_desc: 'Повідомлення за <span class="term-highlight">14 днів</span> — і ми розходимося без штрафів і претензій.',
+      proc_label: 'Як почати', proc_title: 'Чотири кроки.<br><em class="pink-text" style="font-style:italic;">І ти вже зростаєш.</em>',
+      step1_title: 'Пишеш нам в Telegram', step1_desc: 'Просто напиши — без довгих анкет. Скажи що ти модель і хочеш обговорити співпрацю. Ми відповімо протягом години.',
+      step2_title: 'Безкоштовна консультація', step2_desc: 'Телефонуємо і розбираємо твою ситуацію — нішу, поточний дохід, цілі. Без продажів і тиску.',
+      step3_title: 'Погоджуємо умови і запускаємося', step3_desc: 'Підписуємо NDA, обговорюємо відсоток, налаштовуємо команду і запускаємо перші процеси. Від дзвінка до старту — 48 годин.',
+      step4_title: 'Ти знімаєш — ми працюємо', step4_desc: 'Ти займаєшся контентом. Ми беремо на себе все інше — переписки, трафік, аналітику, стратегію. Щотижня — звіт і виплата.',
+      faq_title: 'Відповіді на<br><em class="pink-text" style="font-style:italic;">часті питання</em>',
+      faq1_q: 'Як працює оплата? Ви берете відсоток?',
+      faq1_a: 'Ми працюємо за моделлю revenue share — заробляємо лише тоді, коли заробляєш ти. Ніяких авансів і фіксованих платежів. Точний відсоток обговорюється індивідуально на першому дзвінку, виходячи з твого поточного доходу та цілей.',
+      faq2_q: 'Я втрачу контроль над акаунтом?',
+      faq2_a: 'Ні. Акаунт залишається твоїм на 100%. Ми працюємо як твоя команда, беремо на себе щоденні процеси, але весь стратегічний і творчий контроль залишається у тебе. Ти бачиш все через щотижневі звіти.',
+      faq3_q: 'Чи потрібен мінімальний дохід для старту?',
+      faq3_a: 'Ми працюємо з моделями на різних етапах, включно зі стартом з нуля. Головне — якість контенту і бажання рости. Напиши нам, і на першому дзвінку чесно скажемо, що реально в твоїй ситуації.',
+      faq4_q: 'Хто буде спілкуватися з моїми підписниками?',
+      faq4_a: 'Навчені чаттери, які працюють під твою персону — за детальним гайдом, який ми складаємо разом: твій стиль, фрази, теми і межі. Кожне повідомлення виглядає як твоє.',
+      faq5_q: 'Як швидко я побачу результат?',
+      faq5_a: 'Більшість моделей бачать вимірне зростання вже в перші 2-4 тижні. Значний результат з\'являється до другого місяця — коли розкручуються наші трафік-канали. Ми ставимо реалістичні очікування з першого дня.',
+      cta_label: 'Готова обговорити співпрацю?', cta_title: 'Давай будувати<br><em class="pink-text" style="font-style:italic;">твою імперію</em>',
+      cta_desc: 'Напиши нам — відповімо протягом години і проведемо безкоштовну консультацію.',
+      cta_btn: 'Написати в Telegram',
+      trust1: 'NDA захист', trust2: 'Відповідь за годину', trust3: 'Безкоштовна консультація',
+      footer_copy: '© 2025 AXV Agency. Всі права захищені.',
+    }
+  };
+
+  function applyLang(lang) {
+    const t = translations[lang] || translations.ru;
+    document.documentElement.lang = lang;
+    localStorage.setItem('lang', lang);
+    document.querySelectorAll('.lang-switcher button').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if (t[key] !== undefined) el.textContent = t[key];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.dataset.i18nHtml;
+      if (t[key] !== undefined) el.innerHTML = t[key];
+    });
+  }
+
+  function setLang(lang) { applyLang(lang); }
+
+  const saved = localStorage.getItem('lang');
+  const browser = (navigator.language || 'ru').slice(0, 2).toLowerCase();
+  const supported = ['ru', 'en', 'uk'];
+  applyLang(saved || (supported.includes(browser) ? browser : 'ru'));
+
+  // ── Quiz logic ──
+  (function() {
+    let currentStep = 1;
+    const totalSteps = 6;
+    const answers = {};
+
+    const insights = {
+      safety: 'Аккаунт остаётся твоим — пароль не меняем, перед стартом подписываем NDA. Ты всегда сохраняешь полный контроль.',
+      terms: 'Revenue share 25–30%, никаких фиксированных платежей — зарабатываем только когда зарабатываешь ты.',
+      result: 'Средний рост за 90 дней ×3–4. Можем показать реальные кейсы с цифрами ещё до подписания договора.',
+      nothing: 'Отлично — бесплатная консультация без давления и обязательств. Просто поговорим.'
+    };
+
+    function fmt(n) {
+      if (n === 0) return '$0';
+      return '$' + Math.round(n).toLocaleString('en-US');
+    }
+
+    function showStep(n) {
+      document.querySelectorAll('.quiz-step').forEach(s => { s.classList.remove('active'); s.style.display = 'none'; });
+      if (n === 'result') {
+        const el = document.querySelector('.quiz-step[data-step="result"]');
+        el.style.display = 'block';
+        el.classList.add('active');
+        showResult();
+      } else {
+        const el = document.querySelector('.quiz-step[data-step="' + n + '"]');
+        if (el) { el.style.display = 'block'; el.classList.add('active'); }
+      }
+      const pct = n === 'result' ? 100 : Math.round(((n - 1) / totalSteps) * 100);
+      document.getElementById('quiz-bar').style.width = pct + '%';
+      document.getElementById('quiz-pct').textContent = pct + '%';
+      document.getElementById('quiz-step-label').textContent = n === 'result' ? 'Результат' : 'Вопрос ' + n + ' из ' + totalSteps;
+    }
+
+    function showResult() {
+      const income = +answers[2] || 0;
+      // Базовые значения по подписчикам для тех кто ещё не зарабатывает
+      // (реалистичный потенциал первого месяца с нуля с AXV)
+      const subsBases = { '0': 1800, '250': 2800, '1250': 5500, '3500': 9000, '7500': 15000 };
+      // Базовое значение: если уже зарабатывает — берём её доход, иначе — потенциал по подписчикам
+      const baseline = income > 0 ? income : (subsBases[answers[4]] || 1800);
+      // За месяц с AXV = baseline × 3.5 (минимум $2,500)
+      const monthly = Math.max(Math.round(baseline * 3.5), 2500);
+      // За 3 месяца суммарно = monthly × 3
+      const quarterly = Math.round(monthly * 3);
+      document.getElementById('quiz-res-now').textContent = income > 0 ? fmt(income) : '—';
+      document.getElementById('quiz-res-90').textContent = fmt(monthly);
+      document.getElementById('quiz-res-6m').textContent = fmt(quarterly);
+      const stop = answers[6] || 'nothing';
+      document.getElementById('quiz-insight').textContent = insights[stop] || insights.nothing;
+    }
+
+    document.querySelectorAll('.quiz-opt').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const step = +this.closest('.quiz-step').dataset.step;
+        if (isNaN(step)) return;
+        answers[step] = this.dataset.val;
+        this.closest('.quiz-opts').querySelectorAll('.quiz-opt').forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+        setTimeout(() => {
+          currentStep = step + 1;
+          if (currentStep > totalSteps) showStep('result');
+          else showStep(currentStep);
+        }, 280);
+      });
+    });
+
+    const restartBtn = document.getElementById('quiz-restart');
+    if (restartBtn) {
+      restartBtn.addEventListener('click', function() {
+        Object.keys(answers).forEach(k => delete answers[k]);
+        currentStep = 1;
+        document.querySelectorAll('.quiz-step').forEach(s => { s.classList.remove('active'); s.style.display = 'none'; });
+        document.querySelectorAll('.quiz-opt').forEach(b => b.classList.remove('selected'));
+        showStep(1);
+      });
+    }
+
+    // Init
+    document.querySelectorAll('.quiz-step').forEach(s => { s.style.display = 'none'; });
+    showStep(1);
+  })();
+
+  // ── Carousel ──
+  (function() {
+    const track = document.getElementById('carousel-track');
+    if (!track) return;
+    const slides = track.querySelectorAll('.carousel-slide');
+    const dotsWrap = document.getElementById('carousel-dots');
+    let current = 0;
+    const total = slides.length;
+
+    // Create dots
+    slides.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      d.setAttribute('aria-label', 'Slide ' + (i + 1));
+      d.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(d);
+    });
+
+    function goTo(n) {
+      current = (n + total) % total;
+      const slideW = slides[0].offsetWidth + 20; // gap
+      track.style.transition = 'transform .5s cubic-bezier(0.16,1,0.3,1)';
+      track.style.transform = 'translateX(-' + (current * slideW) + 'px)';
+      dotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+
+    // Auto-advance every 4s
+    setInterval(() => goTo(current + 1), 4000);
+  })();
+</script>
+</body>
+</html>
