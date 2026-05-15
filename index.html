@@ -361,6 +361,7 @@
       .quiz-res-grid { grid-template-columns: 1fr; gap: 10px; }
       .quiz-res-card--featured { padding: 22px 18px; }
       .quiz-res-amount { font-size: 2rem; }
+      .quiz-box .btn-pink { font-size: .8rem; padding: 15px 18px; }
     }
 
     /* ── FAQ ── */
@@ -1574,6 +1575,7 @@
       const stop = answers[6] || 'nothing';
       const ins = getInsights();
       document.getElementById('quiz-insight').textContent = ins[stop] || ins.nothing;
+      applyLang(currentLang);
     }
 
     document.querySelectorAll('.quiz-opt').forEach(btn => {
