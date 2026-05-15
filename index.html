@@ -350,12 +350,12 @@
 <!-- ── Mobile menu ── -->
 <div id="mob-nav" role="dialog" aria-modal="true">
   <button id="mob-close" aria-label="Close">✕</button>
-  <a href="#problem"  onclick="closeMob()">Проблема</a>
-  <a href="#services" onclick="closeMob()">Услуги</a>
-  <a href="#results"  onclick="closeMob()">Результаты</a>
-  <a href="#terms"    onclick="closeMob()">Условия</a>
-  <a href="#process"  onclick="closeMob()">Как начать</a>
-  <a href="#contact"  onclick="closeMob()" class="btn-pink" style="font-size:.875rem;">Обсудить сотрудничество</a>
+  <a href="#problem"  onclick="closeMob()" data-i18n="nav_prob">Проблема</a>
+  <a href="#services" onclick="closeMob()" data-i18n="nav_svc">Услуги</a>
+  <a href="#results"  onclick="closeMob()" data-i18n="nav_res">Результаты</a>
+  <a href="#terms"    onclick="closeMob()" data-i18n="nav_terms_link">Условия</a>
+  <a href="#process"  onclick="closeMob()" data-i18n="nav_proc_link">Как начать</a>
+  <a href="#contact"  onclick="closeMob()" class="btn-pink" style="font-size:.875rem;" data-i18n="nav_mob_discuss">Обсудить сотрудничество</a>
 </div>
 
 <!-- ══ NAVBAR ══ -->
@@ -384,11 +384,11 @@
   </a>
 
   <div class="nav-links">
-    <a href="#problem">Проблема</a>
-    <a href="#services">Услуги</a>
-    <a href="#results">Результаты</a>
-    <a href="#terms">Условия</a>
-    <a href="#process">Как начать</a>
+    <a href="#problem" data-i18n="nav_prob">Проблема</a>
+    <a href="#services" data-i18n="nav_svc">Услуги</a>
+    <a href="#results" data-i18n="nav_res">Результаты</a>
+    <a href="#terms" data-i18n="nav_terms_link">Условия</a>
+    <a href="#process" data-i18n="nav_proc_link">Как начать</a>
   </div>
 
   <div class="lang-switcher" id="lang-switcher">
@@ -579,8 +579,8 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.8"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
           <div>
-            <div style="font-size:.875rem;font-weight:600;color:var(--white);margin-bottom:4px;">47+ активных моделей</div>
-            <div style="font-size:.8125rem;color:var(--muted);line-height:1.6;">Каждая — с персональной стратегией и выделенным чат-менеджером</div>
+            <div style="font-size:.875rem;font-weight:600;color:var(--white);margin-bottom:4px;" data-i18n="about_card1_title">47+ активных моделей</div>
+            <div style="font-size:.8125rem;color:var(--muted);line-height:1.6;" data-i18n="about_card1_desc">Каждая — с персональной стратегией и выделенным чат-менеджером</div>
           </div>
         </div>
         <div style="display:flex;align-items:flex-start;gap:16px;padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);">
@@ -588,8 +588,8 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
           </div>
           <div>
-            <div style="font-size:.875rem;font-weight:600;color:var(--white);margin-bottom:4px;">Средний рост ×3.5 за 90 дней</div>
-            <div style="font-size:.8125rem;color:var(--muted);line-height:1.6;">Реальные данные по нашим моделям, не маркетинговые обещания</div>
+            <div style="font-size:.875rem;font-weight:600;color:var(--white);margin-bottom:4px;" data-i18n="about_card2_title">Средний рост ×3.5 за 90 дней</div>
+            <div style="font-size:.8125rem;color:var(--muted);line-height:1.6;" data-i18n="about_card2_desc">Реальные данные по нашим моделям, не маркетинговые обещания</div>
           </div>
         </div>
         <div style="display:flex;align-items:flex-start;gap:16px;padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);">
@@ -597,8 +597,8 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
           <div>
-            <div style="font-size:.875rem;font-weight:600;color:var(--white);margin-bottom:4px;">NDA с первого дня</div>
-            <div style="font-size:.8125rem;color:var(--muted);line-height:1.6;">Полная конфиденциальность, аккаунт всегда остаётся твоим</div>
+            <div style="font-size:.875rem;font-weight:600;color:var(--white);margin-bottom:4px;" data-i18n="about_card3_title">NDA с первого дня</div>
+            <div style="font-size:.8125rem;color:var(--muted);line-height:1.6;" data-i18n="about_card3_desc">Полная конфиденциальность, аккаунт всегда остаётся твоим</div>
           </div>
         </div>
       </div>
@@ -612,11 +612,11 @@
   <div class="container" style="max-width:680px;">
 
     <div class="sec-head reveal">
-      <p class="label">Персональный расчёт</p>
-      <h2 class="sec-h2">
+      <p class="label" data-i18n="quiz_label">Персональный расчёт</p>
+      <h2 class="sec-h2" data-i18n-html="quiz_title">
         Давай разберём<br><em class="pink-text" style="font-style:italic;">твою ситуацию</em>
       </h2>
-      <p style="margin-top:12px;color:var(--muted);font-size:.9375rem;line-height:1.7;">6 вопросов — и ты увидишь реальный прогноз дохода под свою ситуацию.</p>
+      <p style="margin-top:12px;color:var(--muted);font-size:.9375rem;line-height:1.7;" data-i18n="quiz_desc">6 вопросов — и ты увидишь реальный прогноз дохода под свою ситуацию.</p>
     </div>
 
     <div class="reveal">
@@ -636,20 +636,20 @@
 
         <!-- Steps -->
         <div class="quiz-step active" data-step="1">
-          <p class="quiz-q">Какой у тебя типаж?</p>
+          <p class="quiz-q" data-i18n="quiz_q1">Какой у тебя типаж?</p>
           <div class="quiz-opts">
             <button class="quiz-opt" data-val="babyface">👶 Babyface</button>
             <button class="quiz-opt" data-val="milf">💄 Milf</button>
             <button class="quiz-opt" data-val="asian">🌸 Asian</button>
             <button class="quiz-opt" data-val="girlnextdoor">🏡 Girl next door</button>
-            <button class="quiz-opt" data-val="other">✨ Другая</button>
+            <button class="quiz-opt" data-val="other" data-i18n="qo1_5">✨ Другая</button>
           </div>
         </div>
 
         <div class="quiz-step" data-step="2">
-          <p class="quiz-q">Сколько зарабатываешь сейчас?</p>
+          <p class="quiz-q" data-i18n="quiz_q2">Сколько зарабатываешь сейчас?</p>
           <div class="quiz-opts">
-            <button class="quiz-opt" data-val="0">Не зарабатываю</button>
+            <button class="quiz-opt" data-val="0" data-i18n="qo2_1">Не зарабатываю</button>
             <button class="quiz-opt" data-val="250">До $500</button>
             <button class="quiz-opt" data-val="1250">$500 – $2K</button>
             <button class="quiz-opt" data-val="3500">$2K – $5K</button>
@@ -658,20 +658,20 @@
         </div>
 
         <div class="quiz-step" data-step="3">
-          <p class="quiz-q">Сколько часов в день тратишь на переписки?</p>
+          <p class="quiz-q" data-i18n="quiz_q3">Сколько часов в день тратишь на переписки?</p>
           <div class="quiz-opts">
-            <button class="quiz-opt" data-val="0">Не переписываюсь</button>
-            <button class="quiz-opt" data-val="0.5">Меньше 1 часа</button>
-            <button class="quiz-opt" data-val="2">1 – 3 часа</button>
-            <button class="quiz-opt" data-val="4">3 – 5 часов</button>
-            <button class="quiz-opt" data-val="6">5+ часов</button>
+            <button class="quiz-opt" data-val="0" data-i18n="qo3_1">Не переписываюсь</button>
+            <button class="quiz-opt" data-val="0.5" data-i18n="qo3_2">Меньше 1 часа</button>
+            <button class="quiz-opt" data-val="2" data-i18n="qo3_3">1 – 3 часа</button>
+            <button class="quiz-opt" data-val="4" data-i18n="qo3_4">3 – 5 часов</button>
+            <button class="quiz-opt" data-val="6" data-i18n="qo3_5">5+ часов</button>
           </div>
         </div>
 
         <div class="quiz-step" data-step="4">
-          <p class="quiz-q">Сколько у тебя подписчиков?</p>
+          <p class="quiz-q" data-i18n="quiz_q4">Сколько у тебя подписчиков?</p>
           <div class="quiz-opts">
-            <button class="quiz-opt" data-val="0">Нет подписчиков</button>
+            <button class="quiz-opt" data-val="0" data-i18n="qo4_1">Нет подписчиков</button>
             <button class="quiz-opt" data-val="250">До 500</button>
             <button class="quiz-opt" data-val="1250">500 – 2K</button>
             <button class="quiz-opt" data-val="3500">2K – 5K</button>
@@ -680,50 +680,50 @@
         </div>
 
         <div class="quiz-step" data-step="5">
-          <p class="quiz-q">Главная цель?</p>
+          <p class="quiz-q" data-i18n="quiz_q5">Главная цель?</p>
           <div class="quiz-opts">
-            <button class="quiz-opt" data-val="income">💰 Стабильный доход</button>
-            <button class="quiz-opt" data-val="time">⏱ Освободить время</button>
-            <button class="quiz-opt" data-val="fame">⭐ Популярность</button>
+            <button class="quiz-opt" data-val="income" data-i18n="qo5_1">💰 Стабильный доход</button>
+            <button class="quiz-opt" data-val="time" data-i18n="qo5_2">⏱ Освободить время</button>
+            <button class="quiz-opt" data-val="fame" data-i18n="qo5_3">⭐ Популярность</button>
           </div>
         </div>
 
         <div class="quiz-step" data-step="6">
-          <p class="quiz-q">Что тебя останавливает?</p>
+          <p class="quiz-q" data-i18n="quiz_q6">Что тебя останавливает?</p>
           <div class="quiz-opts">
-            <button class="quiz-opt" data-val="safety">🔒 Боюсь за безопасность</button>
-            <button class="quiz-opt" data-val="terms">📋 Не знаю условий</button>
-            <button class="quiz-opt" data-val="result">🤔 Не уверена в результате</button>
-            <button class="quiz-opt" data-val="nothing">✅ Ничего не останавливает</button>
+            <button class="quiz-opt" data-val="safety" data-i18n="qo6_1">🔒 Боюсь за безопасность</button>
+            <button class="quiz-opt" data-val="terms" data-i18n="qo6_2">📋 Не знаю условий</button>
+            <button class="quiz-opt" data-val="result" data-i18n="qo6_3">🤔 Не уверена в результате</button>
+            <button class="quiz-opt" data-val="nothing" data-i18n="qo6_4">✅ Ничего не останавливает</button>
           </div>
         </div>
 
         <!-- Result -->
         <div class="quiz-step" data-step="result" style="display:none;">
-          <p style="font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--pink);margin-bottom:20px;">Твой прогноз с AXV Agency</p>
+          <p style="font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--pink);margin-bottom:20px;" data-i18n="quiz_res_title">Твой прогноз с AXV Agency</p>
           <div class="quiz-res-grid" style="margin-bottom:24px;">
             <div class="quiz-res-card quiz-res-card--muted">
-              <div class="quiz-res-label">Сейчас</div>
+              <div class="quiz-res-label" data-i18n="quiz_res_now">Сейчас</div>
               <div id="quiz-res-now" class="serif quiz-res-amount quiz-res-amount--muted">—</div>
-              <div class="quiz-res-sub">в месяц</div>
+              <div class="quiz-res-sub" data-i18n="quiz_res_now_sub">в месяц</div>
             </div>
             <div class="quiz-res-card quiz-res-card--featured">
-              <div class="quiz-res-label" style="color:rgba(255,255,255,.75);">За месяц</div>
+              <div class="quiz-res-label" style="color:rgba(255,255,255,.75);" data-i18n="quiz_res_month">За месяц</div>
               <div id="quiz-res-90" class="serif quiz-res-amount" style="color:#fff;">$0</div>
-              <div class="quiz-res-sub" style="color:rgba(255,255,255,.65);">с AXV Agency</div>
+              <div class="quiz-res-sub" style="color:rgba(255,255,255,.65);" data-i18n="quiz_res_month_sub">с AXV Agency</div>
             </div>
             <div class="quiz-res-card quiz-res-card--muted">
-              <div class="quiz-res-label">За 3 месяца</div>
+              <div class="quiz-res-label" data-i18n="quiz_res_3m">За 3 месяца</div>
               <div id="quiz-res-6m" class="serif quiz-res-amount quiz-res-amount--gradient">$0</div>
-              <div class="quiz-res-sub">суммарно</div>
+              <div class="quiz-res-sub" data-i18n="quiz_res_3m_sub">суммарно</div>
             </div>
           </div>
           <div id="quiz-insight" style="background:rgba(242,118,158,0.06);border:1px solid rgba(242,118,158,0.18);border-left:3px solid var(--pink);border-radius:12px;padding:18px 20px;font-size:.875rem;color:var(--muted);line-height:1.7;margin-bottom:24px;"></div>
           <a href="https://t.me/axv_agency" target="_blank" rel="noopener" class="btn-pink" style="width:100%;justify-content:center;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-            Написать в Telegram
+            <span data-i18n="quiz_cta">Написать в Telegram</span>
           </a>
-          <button id="quiz-restart" style="display:block;width:100%;margin-top:12px;background:none;border:none;color:var(--muted);font-size:.8rem;cursor:pointer;font-family:'Montserrat',sans-serif;text-align:center;padding:8px;transition:color .2s;" onmouseover="this.style.color='var(--pink)'" onmouseout="this.style.color='var(--muted)'">← Пройти заново</button>
+          <button id="quiz-restart" style="display:block;width:100%;margin-top:12px;background:none;border:none;color:var(--muted);font-size:.8rem;cursor:pointer;font-family:'Montserrat',sans-serif;text-align:center;padding:8px;transition:color .2s;" onmouseover="this.style.color='var(--pink)'" onmouseout="this.style.color='var(--muted)'" data-i18n="quiz_restart">← Пройти заново</button>
         </div>
 
       </div>
@@ -1017,7 +1017,7 @@
   <div class="container" style="max-width:780px;">
 
     <div class="sec-head reveal">
-      <p class="label">FAQ</p>
+      <p class="label" data-i18n="faq_label">FAQ</p>
       <h2 class="sec-h2" data-i18n-html="faq_title">Ответы на<br><em class="pink-text" style="font-style:italic;">частые вопросы</em></h2>
     </div>
 
@@ -1232,6 +1232,7 @@
   });
 
   // ══ i18n ══
+  let currentLang = 'ru';
   const translations = {
     ru: {
       nav_cta: 'Обсудить',
@@ -1292,6 +1293,29 @@
       faq4_a: 'Обученные чаттеры, которые работают под твою персону — по детальному гайду, который мы составляем вместе: твой стиль, фразы, темы и границы. Каждое сообщение выглядит как твоё.',
       faq5_q: 'Как быстро я увижу результат?',
       faq5_a: 'Большинство моделей видят измеримый рост уже в первые 2-4 недели. Значительный результат появляется ко второму месяцу — когда раскручиваются наши трафик-каналы. Мы ставим реалистичные ожидания с первого дня.',
+      nav_prob: 'Проблема', nav_svc: 'Услуги', nav_res: 'Результаты', nav_terms_link: 'Условия', nav_proc_link: 'Как начать',
+      nav_mob_discuss: 'Обсудить сотрудничество',
+      about_card1_title: '47+ активных моделей', about_card1_desc: 'Каждая — с персональной стратегией и выделенным чат-менеджером',
+      about_card2_title: 'Средний рост ×3.5 за 90 дней', about_card2_desc: 'Реальные данные по нашим моделям, не маркетинговые обещания',
+      about_card3_title: 'NDA с первого дня', about_card3_desc: 'Полная конфиденциальность, аккаунт всегда остаётся твоим',
+      quiz_label: 'Персональный расчёт', quiz_title: 'Давай разберём<br><em class="pink-text" style="font-style:italic;">твою ситуацию</em>',
+      quiz_desc: '6 вопросов — и ты увидишь реальный прогноз дохода под свою ситуацию.',
+      quiz_step_word: 'Вопрос', quiz_step_of: 'из', quiz_result_label: 'Результат',
+      quiz_q1: 'Какой у тебя типаж?', quiz_q2: 'Сколько зарабатываешь сейчас?', quiz_q3: 'Сколько часов в день тратишь на переписки?',
+      quiz_q4: 'Сколько у тебя подписчиков?', quiz_q5: 'Главная цель?', quiz_q6: 'Что тебя останавливает?',
+      qo1_5: '✨ Другая', qo2_1: 'Не зарабатываю',
+      qo3_1: 'Не переписываюсь', qo3_2: 'Меньше 1 часа', qo3_3: '1 – 3 часа', qo3_4: '3 – 5 часов', qo3_5: '5+ часов',
+      qo4_1: 'Нет подписчиков',
+      qo5_1: '💰 Стабильный доход', qo5_2: '⏱ Освободить время', qo5_3: '⭐ Популярность',
+      qo6_1: '🔒 Боюсь за безопасность', qo6_2: '📋 Не знаю условий', qo6_3: '🤔 Не уверена в результате', qo6_4: '✅ Ничего не останавливает',
+      quiz_res_title: 'Твой прогноз с AXV Agency', quiz_res_now: 'Сейчас', quiz_res_now_sub: 'в месяц',
+      quiz_res_month: 'За месяц', quiz_res_month_sub: 'с AXV Agency', quiz_res_3m: 'За 3 месяца', quiz_res_3m_sub: 'суммарно',
+      quiz_cta: 'Написать в Telegram', quiz_restart: '← Пройти заново',
+      insight_safety: 'Аккаунт остаётся твоим — пароль не меняем, перед стартом подписываем NDA. Ты всегда сохраняешь полный контроль.',
+      insight_terms: 'Revenue share 25–30%, никаких фиксированных платежей — зарабатываем только когда зарабатываешь ты.',
+      insight_result: 'Средний рост за 90 дней ×3–4. Можем показать реальные кейсы с цифрами ещё до подписания договора.',
+      insight_nothing: 'Отлично — бесплатная консультация без давления и обязательств. Просто поговорим.',
+      faq_label: 'FAQ',
       cta_label: 'Готова обсудить сотрудничество?', cta_title: 'Давай строить<br><em class="pink-text" style="font-style:italic;">твою империю</em>',
       cta_desc: 'Напиши нам — ответим в течение часа и проведём бесплатную консультацию.',
       cta_btn: 'Написать в Telegram',
@@ -1357,6 +1381,29 @@
       faq4_a: 'Trained chatters who work under your persona, guided by a detailed profile we build together — your tone, phrases, topics, and boundaries. Every message feels authentic and like you.',
       faq5_q: 'How fast will I see results?',
       faq5_a: 'Most models see measurable growth within the first 2-4 weeks. Significant results appear by month two as our traffic channels build momentum. We set realistic targets from day one.',
+      nav_prob: 'Problem', nav_svc: 'Services', nav_res: 'Results', nav_terms_link: 'Terms', nav_proc_link: 'How to start',
+      nav_mob_discuss: 'Discuss cooperation',
+      about_card1_title: '47+ active models', about_card1_desc: 'Each with a personal strategy and dedicated chat manager',
+      about_card2_title: 'Average growth ×3.5 in 90 days', about_card2_desc: 'Real data from our models, not marketing promises',
+      about_card3_title: 'NDA from day one', about_card3_desc: 'Full confidentiality, your account always stays yours',
+      quiz_label: 'Personal estimate', quiz_title: 'Let\'s figure out<br><em class="pink-text" style="font-style:italic;">your situation</em>',
+      quiz_desc: '6 questions — and you\'ll see a real income forecast for your situation.',
+      quiz_step_word: 'Question', quiz_step_of: 'of', quiz_result_label: 'Result',
+      quiz_q1: 'What\'s your type?', quiz_q2: 'How much are you earning now?', quiz_q3: 'How many hours a day do you spend on chats?',
+      quiz_q4: 'How many subscribers do you have?', quiz_q5: 'Main goal?', quiz_q6: 'What\'s stopping you?',
+      qo1_5: '✨ Other', qo2_1: 'Not earning yet',
+      qo3_1: 'Don\'t chat', qo3_2: 'Less than 1 hour', qo3_3: '1 – 3 hours', qo3_4: '3 – 5 hours', qo3_5: '5+ hours',
+      qo4_1: 'No subscribers',
+      qo5_1: '💰 Stable income', qo5_2: '⏱ Free up time', qo5_3: '⭐ Popularity',
+      qo6_1: '🔒 Safety concerns', qo6_2: '📋 Don\'t know the terms', qo6_3: '🤔 Unsure about results', qo6_4: '✅ Nothing stops me',
+      quiz_res_title: 'Your forecast with AXV Agency', quiz_res_now: 'Now', quiz_res_now_sub: 'per month',
+      quiz_res_month: 'Per month', quiz_res_month_sub: 'with AXV Agency', quiz_res_3m: 'In 3 months', quiz_res_3m_sub: 'total',
+      quiz_cta: 'Write on Telegram', quiz_restart: '← Take again',
+      insight_safety: 'Your account stays yours — we never change the password, and we sign an NDA before starting. You always keep full control.',
+      insight_terms: 'Revenue share 25–30%, no fixed payments — we only earn when you earn.',
+      insight_result: 'Average growth ×3–4 in 90 days. We can show real cases with numbers before you sign anything.',
+      insight_nothing: 'Great — a free consultation, no pressure, no obligations. Let\'s just talk.',
+      faq_label: 'FAQ',
       cta_label: 'Ready to discuss?', cta_title: 'Let\'s build<br><em class="pink-text" style="font-style:italic;">your empire</em>',
       cta_desc: 'Write to us — we\'ll reply within an hour and run a free consultation.',
       cta_btn: 'Write on Telegram',
@@ -1422,6 +1469,29 @@
       faq4_a: 'Навчені чаттери, які працюють під твою персону — за детальним гайдом, який ми складаємо разом: твій стиль, фрази, теми і межі. Кожне повідомлення виглядає як твоє.',
       faq5_q: 'Як швидко я побачу результат?',
       faq5_a: 'Більшість моделей бачать вимірне зростання вже в перші 2-4 тижні. Значний результат з\'являється до другого місяця — коли розкручуються наші трафік-канали. Ми ставимо реалістичні очікування з першого дня.',
+      nav_prob: 'Проблема', nav_svc: 'Послуги', nav_res: 'Результати', nav_terms_link: 'Умови', nav_proc_link: 'Як почати',
+      nav_mob_discuss: 'Обговорити співпрацю',
+      about_card1_title: '47+ активних моделей', about_card1_desc: 'Кожна — з персональною стратегією і виділеним чат-менеджером',
+      about_card2_title: 'Середнє зростання ×3.5 за 90 днів', about_card2_desc: 'Реальні дані по наших моделях, не маркетингові обіцянки',
+      about_card3_title: 'NDA з першого дня', about_card3_desc: 'Повна конфіденційність, акаунт завжди залишається твоїм',
+      quiz_label: 'Персональний розрахунок', quiz_title: 'Давай розберемо<br><em class="pink-text" style="font-style:italic;">твою ситуацію</em>',
+      quiz_desc: '6 питань — і ти побачиш реальний прогноз доходу під свою ситуацію.',
+      quiz_step_word: 'Питання', quiz_step_of: 'з', quiz_result_label: 'Результат',
+      quiz_q1: 'Який у тебе типаж?', quiz_q2: 'Скільки заробляєш зараз?', quiz_q3: 'Скільки годин на день витрачаєш на переписки?',
+      quiz_q4: 'Скільки у тебе підписників?', quiz_q5: 'Головна мета?', quiz_q6: 'Що тебе зупиняє?',
+      qo1_5: '✨ Інша', qo2_1: 'Не заробляю',
+      qo3_1: 'Не листуюсь', qo3_2: 'Менше 1 години', qo3_3: '1 – 3 години', qo3_4: '3 – 5 годин', qo3_5: '5+ годин',
+      qo4_1: 'Немає підписників',
+      qo5_1: '💰 Стабільний дохід', qo5_2: '⏱ Звільнити час', qo5_3: '⭐ Популярність',
+      qo6_1: '🔒 Боюсь за безпеку', qo6_2: '📋 Не знаю умов', qo6_3: '🤔 Не впевнена в результаті', qo6_4: '✅ Ніщо не зупиняє',
+      quiz_res_title: 'Твій прогноз з AXV Agency', quiz_res_now: 'Зараз', quiz_res_now_sub: 'на місяць',
+      quiz_res_month: 'За місяць', quiz_res_month_sub: 'з AXV Agency', quiz_res_3m: 'За 3 місяці', quiz_res_3m_sub: 'сумарно',
+      quiz_cta: 'Написати в Telegram', quiz_restart: '← Пройти знову',
+      insight_safety: 'Акаунт залишається твоїм — пароль не змінюємо, перед стартом підписуємо NDA. Ти завжди зберігаєш повний контроль.',
+      insight_terms: 'Revenue share 25–30%, ніяких фіксованих платежів — заробляємо лише коли заробляєш ти.',
+      insight_result: 'Середнє зростання за 90 днів ×3–4. Можемо показати реальні кейси з цифрами ще до підписання договору.',
+      insight_nothing: 'Чудово — безкоштовна консультація без тиску і зобов\'язань. Просто поговоримо.',
+      faq_label: 'FAQ',
       cta_label: 'Готова обговорити співпрацю?', cta_title: 'Давай будувати<br><em class="pink-text" style="font-style:italic;">твою імперію</em>',
       cta_desc: 'Напиши нам — відповімо протягом години і проведемо безкоштовну консультацію.',
       cta_btn: 'Написати в Telegram',
@@ -1434,6 +1504,7 @@
     const t = translations[lang] || translations.ru;
     document.documentElement.lang = lang;
     localStorage.setItem('lang', lang);
+    currentLang = lang;
     document.querySelectorAll('.lang-switcher button').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.lang === lang);
     });
@@ -1460,12 +1531,15 @@
     const totalSteps = 6;
     const answers = {};
 
-    const insights = {
-      safety: 'Аккаунт остаётся твоим — пароль не меняем, перед стартом подписываем NDA. Ты всегда сохраняешь полный контроль.',
-      terms: 'Revenue share 25–30%, никаких фиксированных платежей — зарабатываем только когда зарабатываешь ты.',
-      result: 'Средний рост за 90 дней ×3–4. Можем показать реальные кейсы с цифрами ещё до подписания договора.',
-      nothing: 'Отлично — бесплатная консультация без давления и обязательств. Просто поговорим.'
-    };
+    function getInsights() {
+      const qt = translations[currentLang] || translations.ru;
+      return {
+        safety: qt.insight_safety,
+        terms:  qt.insight_terms,
+        result: qt.insight_result,
+        nothing: qt.insight_nothing
+      };
+    }
 
     function fmt(n) {
       if (n === 0) return '$0';
@@ -1486,7 +1560,8 @@
       const pct = n === 'result' ? 100 : Math.round(((n - 1) / totalSteps) * 100);
       document.getElementById('quiz-bar').style.width = pct + '%';
       document.getElementById('quiz-pct').textContent = pct + '%';
-      document.getElementById('quiz-step-label').textContent = n === 'result' ? 'Результат' : 'Вопрос ' + n + ' из ' + totalSteps;
+      const qt = translations[currentLang] || translations.ru;
+      document.getElementById('quiz-step-label').textContent = n === 'result' ? qt.quiz_result_label : (qt.quiz_step_word + ' ' + n + ' ' + qt.quiz_step_of + ' ' + totalSteps);
     }
 
     function showResult() {
@@ -1504,7 +1579,8 @@
       document.getElementById('quiz-res-90').textContent = fmt(monthly);
       document.getElementById('quiz-res-6m').textContent = fmt(quarterly);
       const stop = answers[6] || 'nothing';
-      document.getElementById('quiz-insight').textContent = insights[stop] || insights.nothing;
+      const ins = getInsights();
+      document.getElementById('quiz-insight').textContent = ins[stop] || ins.nothing;
     }
 
     document.querySelectorAll('.quiz-opt').forEach(btn => {
