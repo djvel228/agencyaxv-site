@@ -323,6 +323,7 @@
     /* ── Case photo placeholder ── */
     .case-photo-placeholder { width:100%; height:140px; background:linear-gradient(135deg,rgba(242,118,158,0.1),rgba(242,118,158,0.03)); border:1px dashed rgba(242,118,158,0.25); border-radius:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; margin-bottom:18px; }
     .case-photo-placeholder span { font-size:.6rem; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); }
+    .case-photo { width:100%; height:160px; object-fit:cover; object-position:center top; border-radius:10px; margin-bottom:18px; display:block; border:1px solid var(--border); }
 
     /* ── Quiz result grid ── */
     .quiz-res-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
@@ -843,20 +844,14 @@
     <div class="cases-grid">
 
       <div class="case-card reveal d1">
-        <div class="case-photo-placeholder">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1" opacity="0.45"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span data-i18n="case_photo_label">Фото кейса</span>
-        </div>
+        <img src="images/case1-stats.png" alt="Кейс 1" class="case-photo" />
         <p class="case-action" data-i18n="case1_action">Запустили трафик с Reddit + TikTok, выстроили чат-продажи PPV с первой недели.</p>
         <div class="case-result" data-stat="4200" data-prefix="$">$0</div>
         <div class="case-period" data-i18n="case1_period">за первый месяц</div>
       </div>
 
       <div class="case-card reveal d2">
-        <div class="case-photo-placeholder">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1" opacity="0.45"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span data-i18n="case_photo_label">Фото кейса</span>
-        </div>
+        <img src="images/case2-stats.png" alt="Кейс 2" class="case-photo" />
         <p class="case-action" data-i18n="case2_action">Пересобрали стратегию ценообразования, подключили массовые PPV-рассылки и шаутауты.</p>
         <div class="case-result" data-stat="6100" data-prefix="$">$0</div>
         <div class="case-period" data-i18n="case2_period">через 60 дней</div>
