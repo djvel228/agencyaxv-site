@@ -307,6 +307,22 @@
       #about .reveal[style*="grid-template-columns:1fr 1fr"] { grid-template-columns:1fr !important; }
     }
 
+    /* ── Quiz result grid ── */
+    .quiz-res-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+    .quiz-res-card { border-radius: 12px; padding: 18px; text-align: center; }
+    .quiz-res-card--muted { background: var(--surface); border: 1px solid var(--border); }
+    .quiz-res-card--featured { background: linear-gradient(145deg, var(--pink), var(--pink-light)); }
+    .quiz-res-label { font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .quiz-res-amount { font-size: 1.75rem; font-weight: 600; }
+    .quiz-res-amount--muted { color: var(--muted); }
+    .quiz-res-amount--gradient { background: linear-gradient(135deg, var(--pink), var(--pink-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .quiz-res-sub { font-size: .65rem; color: var(--muted); margin-top: 4px; }
+    @media (max-width: 520px) {
+      .quiz-res-grid { grid-template-columns: 1fr; gap: 10px; }
+      .quiz-res-card--featured { padding: 22px 18px; }
+      .quiz-res-amount { font-size: 2rem; }
+    }
+
     /* ── FAQ ── */
     .faq-item { border-bottom: 1px solid var(--border); }
     .faq-item:first-child { border-top: 1px solid var(--border); }
@@ -674,21 +690,21 @@
         <!-- Result -->
         <div class="quiz-step" data-step="result" style="display:none;">
           <p style="font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--pink);margin-bottom:20px;">Твой прогноз с AXV Agency</p>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px;">
-            <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center;">
-              <div style="font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Сейчас</div>
-              <div id="quiz-res-now" class="serif" style="font-size:1.75rem;font-weight:600;color:var(--muted);">—</div>
-              <div style="font-size:.65rem;color:var(--muted);margin-top:4px;">в месяц</div>
+          <div class="quiz-res-grid" style="margin-bottom:24px;">
+            <div class="quiz-res-card quiz-res-card--muted">
+              <div class="quiz-res-label">Сейчас</div>
+              <div id="quiz-res-now" class="serif quiz-res-amount quiz-res-amount--muted">—</div>
+              <div class="quiz-res-sub">в месяц</div>
             </div>
-            <div style="background:linear-gradient(145deg,var(--pink),var(--pink-light));border-radius:12px;padding:18px;text-align:center;">
-              <div style="font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:8px;">За месяц</div>
-              <div id="quiz-res-90" class="serif" style="font-size:1.75rem;font-weight:600;color:#fff;">$0</div>
-              <div style="font-size:.65rem;color:rgba(255,255,255,.65);margin-top:4px;">с AXV Agency</div>
+            <div class="quiz-res-card quiz-res-card--featured">
+              <div class="quiz-res-label" style="color:rgba(255,255,255,.75);">За месяц</div>
+              <div id="quiz-res-90" class="serif quiz-res-amount" style="color:#fff;">$0</div>
+              <div class="quiz-res-sub" style="color:rgba(255,255,255,.65);">с AXV Agency</div>
             </div>
-            <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center;">
-              <div style="font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">За 3 месяца</div>
-              <div id="quiz-res-6m" class="serif" style="font-size:1.75rem;font-weight:600;background:linear-gradient(135deg,var(--pink),var(--pink-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">$0</div>
-              <div style="font-size:.65rem;color:var(--muted);margin-top:4px;">суммарно</div>
+            <div class="quiz-res-card quiz-res-card--muted">
+              <div class="quiz-res-label">За 3 месяца</div>
+              <div id="quiz-res-6m" class="serif quiz-res-amount quiz-res-amount--gradient">$0</div>
+              <div class="quiz-res-sub">суммарно</div>
             </div>
           </div>
           <div id="quiz-insight" style="background:rgba(242,118,158,0.06);border:1px solid rgba(242,118,158,0.18);border-left:3px solid var(--pink);border-radius:12px;padding:18px 20px;font-size:.875rem;color:var(--muted);line-height:1.7;margin-bottom:24px;"></div>
