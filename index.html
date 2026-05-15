@@ -271,6 +271,10 @@
 .svc-card-top { background:linear-gradient(145deg,rgba(80,15,35,0.85),rgba(30,8,20,0.95)); padding:44px 32px; display:flex; align-items:center; justify-content:center; min-height:160px; }
 .svc-card-top svg { opacity:.85; transition:opacity .25s; }
 .svc-card:hover .svc-card-top svg { opacity:1; filter:drop-shadow(0 0 8px rgba(242,118,158,0.5)); }
+    .svc-card-top--photo { padding:0; min-height:200px; overflow:hidden; position:relative; }
+    .svc-card-top--photo img { width:100%; height:200px; object-fit:cover; object-position:center top; display:block; transition:transform .5s var(--ease); }
+    .svc-card:hover .svc-card-top--photo img { transform:scale(1.04); }
+    .svc-card-top--photo::after { content:''; position:absolute; bottom:0; left:0; right:0; height:60px; background:linear-gradient(to bottom,transparent,var(--surface)); pointer-events:none; }
 .svc-card-body { padding:28px 28px 32px; }
 .svc-card-title { font-family:'Cormorant',serif; font-size:1.5rem; font-weight:500; color:var(--white); line-height:1.25; margin-bottom:10px; }
 .svc-card-desc { font-size:.875rem; color:var(--muted); line-height:1.75; margin-bottom:20px; }
@@ -756,10 +760,8 @@
 
       <!-- Карточка 1: Управление аккаунтом -->
       <div class="svc-card reveal d1">
-        <div class="svc-card-top">
-          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#F2769E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
-          </svg>
+        <div class="svc-card-top svc-card-top--photo">
+          <img src="images/svc-chat-manager.jpg" alt="Управление аккаунтом" loading="lazy" />
         </div>
         <div class="svc-card-body">
           <div class="svc-card-title" data-i18n="svc1_title">Управление аккаунтом</div>
