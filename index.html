@@ -127,6 +127,10 @@
       line-height: 1.5;
     }
     .pain-transition strong { font-style: normal; font-weight: 600; }
+    @media (max-width: 520px) {
+      .quiz-box { padding: 20px !important; }
+      .pain-transition strong { display: block; margin-top: 4px; }
+    }
 
     /* ── Services list ── */
     .svc-list { display: flex; flex-direction: column; gap: 0; }
@@ -638,7 +642,7 @@
       </div>
 
       <!-- Quiz box -->
-      <div id="quiz-box" style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:40px;min-height:320px;position:relative;overflow:hidden;">
+      <div id="quiz-box" style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:40px;min-height:320px;position:relative;" class="quiz-box">
 
         <!-- Steps -->
         <div class="quiz-step active" data-step="1">
@@ -1335,7 +1339,7 @@
       insight_result: 'Средний рост за 90 дней ×3–4. Можем показать реальные кейсы с цифрами ещё до подписания договора.',
       insight_nothing: 'Отлично — бесплатная консультация без давления и обязательств. Просто поговорим.',
       faq_label: 'FAQ',
-      cta_label: 'Готова обсудить сотрудничество?', cta_title: 'Давай строить нашу<br><em class="pink-text" style="font-style:italic;">империю вместе</em>',
+      cta_label: 'Готова обсудить сотрудничество?', cta_title: 'Давай строить<br>нашу <em class="pink-text" style="font-style:italic;">империю вместе</em>',
       cta_desc: 'Напиши нам — ответим в течение часа и проведём бесплатную консультацию.',
       cta_btn: 'Написать в Telegram',
       trust1: 'NDA защита', trust2: 'Ответ за час', trust3: 'Бесплатная консультация',
@@ -1424,7 +1428,7 @@
       insight_result: 'Average growth ×3–4 in 90 days. We can show real cases with numbers before you sign anything.',
       insight_nothing: 'Great — a free consultation, no pressure, no obligations. Let\'s just talk.',
       faq_label: 'FAQ',
-      cta_label: 'Ready to discuss?', cta_title: 'Let\'s build our<br><em class="pink-text" style="font-style:italic;">empire together</em>',
+      cta_label: 'Ready to discuss?', cta_title: 'Let\'s build<br>our <em class="pink-text" style="font-style:italic;">empire together</em>',
       cta_desc: 'Write to us — we\'ll reply within an hour and run a free consultation.',
       cta_btn: 'Write on Telegram',
       trust1: 'NDA Protection', trust2: 'Reply within 1 hour', trust3: 'Free consultation',
@@ -1513,7 +1517,7 @@
       insight_result: 'Середнє зростання за 90 днів ×3–4. Можемо показати реальні кейси з цифрами ще до підписання договору.',
       insight_nothing: 'Чудово — безкоштовна консультація без тиску і зобов\'язань. Просто поговоримо.',
       faq_label: 'FAQ',
-      cta_label: 'Готова обговорити співпрацю?', cta_title: 'Давай будувати нашу<br><em class="pink-text" style="font-style:italic;">імперію разом</em>',
+      cta_label: 'Готова обговорити співпрацю?', cta_title: 'Давай будувати<br>нашу <em class="pink-text" style="font-style:italic;">імперію разом</em>',
       cta_desc: 'Напиши нам — відповімо протягом години і проведемо безкоштовну консультацію.',
       cta_btn: 'Написати в Telegram',
       trust1: 'NDA захист', trust2: 'Відповідь за годину', trust3: 'Безкоштовна консультація',
