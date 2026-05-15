@@ -350,12 +350,13 @@
 <!-- ── Mobile menu ── -->
 <div id="mob-nav" role="dialog" aria-modal="true">
   <button id="mob-close" aria-label="Close">✕</button>
-  <a href="#problem"  onclick="closeMob()" data-i18n="nav_prob">Проблема</a>
+  <a href="#about"    onclick="closeMob()" data-i18n="nav_about">О нас</a>
+  <a href="#quiz"     onclick="closeMob()" data-i18n="nav_quiz">Диагностика</a>
   <a href="#services" onclick="closeMob()" data-i18n="nav_svc">Услуги</a>
   <a href="#results"  onclick="closeMob()" data-i18n="nav_res">Результаты</a>
   <a href="#terms"    onclick="closeMob()" data-i18n="nav_terms_link">Условия</a>
-  <a href="#process"  onclick="closeMob()" data-i18n="nav_proc_link">Как начать</a>
-  <a href="#contact"  onclick="closeMob()" class="btn-pink" style="font-size:.875rem;" data-i18n="nav_mob_discuss">Обсудить сотрудничество</a>
+  <a href="#faq"      onclick="closeMob()" data-i18n="nav_faq">Ответы на вопросы</a>
+  <a href="#contact"  onclick="closeMob()" class="btn-pink" style="font-size:.875rem;" data-i18n="nav_mob_discuss">Написать нам</a>
 </div>
 
 <!-- ══ NAVBAR ══ -->
@@ -384,11 +385,12 @@
   </a>
 
   <div class="nav-links">
-    <a href="#problem" data-i18n="nav_prob">Проблема</a>
+    <a href="#about"    data-i18n="nav_about">О нас</a>
+    <a href="#quiz"     data-i18n="nav_quiz">Диагностика</a>
     <a href="#services" data-i18n="nav_svc">Услуги</a>
-    <a href="#results" data-i18n="nav_res">Результаты</a>
-    <a href="#terms" data-i18n="nav_terms_link">Условия</a>
-    <a href="#process" data-i18n="nav_proc_link">Как начать</a>
+    <a href="#results"  data-i18n="nav_res">Результаты</a>
+    <a href="#terms"    data-i18n="nav_terms_link">Условия</a>
+    <a href="#faq"      data-i18n="nav_faq">Ответы на вопросы</a>
   </div>
 
   <div class="lang-switcher" id="lang-switcher">
@@ -397,7 +399,7 @@
     <button onclick="setLang('uk')" data-lang="uk">UK</button>
   </div>
 
-  <a href="#contact" class="btn-pink" style="padding:12px 28px;font-size:.6875rem;" data-i18n="nav_cta">Обсудить</a>
+  <a href="#contact" class="btn-pink" style="padding:12px 28px;font-size:.6875rem;" data-i18n="nav_cta">Написать нам</a>
   <button id="burger" aria-label="Menu">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--white)" stroke-width="1.8"><path d="M3 12h18M3 6h18M3 18h12"/></svg>
   </button>
@@ -1150,7 +1152,10 @@
 
   // ── Mobile menu ──
   const mob = document.getElementById('mob-nav');
-  document.getElementById('burger').onclick = () => { mob.classList.add('open'); document.body.style.overflow = 'hidden'; };
+  document.getElementById('burger').onclick = () => {
+    const isOpen = mob.classList.toggle('open');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  };
   document.getElementById('mob-close').onclick = closeMob;
   function closeMob() { mob.classList.remove('open'); document.body.style.overflow = ''; }
 
@@ -1235,7 +1240,7 @@
   let currentLang = 'ru';
   const translations = {
     ru: {
-      nav_cta: 'Обсудить',
+      nav_cta: 'Написать нам',
       hero_badge: 'NOW ACCEPTING MODELS',
       hero_h1: 'Ты создаёшь.<br><em class="pink-text" style="font-style:italic;">Мы развиваем.</em>',
       hero_desc: 'Полный цикл управления OnlyFans — трафик, переписки, контент-план и аналитика. Ты занимаешься съёмкой, мы берём на себя всё остальное.',
@@ -1293,8 +1298,8 @@
       faq4_a: 'Обученные чаттеры, которые работают под твою персону — по детальному гайду, который мы составляем вместе: твой стиль, фразы, темы и границы. Каждое сообщение выглядит как твоё.',
       faq5_q: 'Как быстро я увижу результат?',
       faq5_a: 'Большинство моделей видят измеримый рост уже в первые 2-4 недели. Значительный результат появляется ко второму месяцу — когда раскручиваются наши трафик-каналы. Мы ставим реалистичные ожидания с первого дня.',
-      nav_prob: 'Проблема', nav_svc: 'Услуги', nav_res: 'Результаты', nav_terms_link: 'Условия', nav_proc_link: 'Как начать',
-      nav_mob_discuss: 'Обсудить сотрудничество',
+      nav_about: 'О нас', nav_quiz: 'Диагностика', nav_svc: 'Услуги', nav_res: 'Результаты', nav_terms_link: 'Условия', nav_faq: 'Ответы на вопросы',
+      nav_mob_discuss: 'Написать нам',
       about_card1_title: '47+ активных моделей', about_card1_desc: 'Каждая — с персональной стратегией и выделенным чат-менеджером',
       about_card2_title: 'Средний рост ×3.5 за 90 дней', about_card2_desc: 'Реальные данные по нашим моделям, не маркетинговые обещания',
       about_card3_title: 'NDA с первого дня', about_card3_desc: 'Полная конфиденциальность, аккаунт всегда остаётся твоим',
@@ -1323,7 +1328,7 @@
       footer_copy: '© 2025 AXV Agency. Все права защищены.',
     },
     en: {
-      nav_cta: 'Apply',
+      nav_cta: 'Write to us',
       hero_badge: 'NOW ACCEPTING MODELS',
       hero_h1: 'You create.<br><em class="pink-text" style="font-style:italic;">We grow.</em>',
       hero_desc: 'Full-cycle OnlyFans management — traffic, chat, content plan and analytics. You focus on content, we handle everything else.',
@@ -1381,8 +1386,8 @@
       faq4_a: 'Trained chatters who work under your persona, guided by a detailed profile we build together — your tone, phrases, topics, and boundaries. Every message feels authentic and like you.',
       faq5_q: 'How fast will I see results?',
       faq5_a: 'Most models see measurable growth within the first 2-4 weeks. Significant results appear by month two as our traffic channels build momentum. We set realistic targets from day one.',
-      nav_prob: 'Problem', nav_svc: 'Services', nav_res: 'Results', nav_terms_link: 'Terms', nav_proc_link: 'How to start',
-      nav_mob_discuss: 'Discuss cooperation',
+      nav_about: 'About us', nav_quiz: 'Diagnostics', nav_svc: 'Services', nav_res: 'Results', nav_terms_link: 'Terms', nav_faq: 'FAQ',
+      nav_mob_discuss: 'Write to us',
       about_card1_title: '47+ active models', about_card1_desc: 'Each with a personal strategy and dedicated chat manager',
       about_card2_title: 'Average growth ×3.5 in 90 days', about_card2_desc: 'Real data from our models, not marketing promises',
       about_card3_title: 'NDA from day one', about_card3_desc: 'Full confidentiality, your account always stays yours',
@@ -1411,7 +1416,7 @@
       footer_copy: '© 2025 AXV Agency. All rights reserved.',
     },
     uk: {
-      nav_cta: 'Обговорити',
+      nav_cta: 'Написати нам',
       hero_badge: 'NOW ACCEPTING MODELS',
       hero_h1: 'Ти створюєш.<br><em class="pink-text" style="font-style:italic;">Ми розвиваємо.</em>',
       hero_desc: 'Повний цикл управління OnlyFans — трафік, переписки, контент-план та аналітика. Ти займаєшся зйомкою, ми беремо на себе все інше.',
@@ -1469,8 +1474,8 @@
       faq4_a: 'Навчені чаттери, які працюють під твою персону — за детальним гайдом, який ми складаємо разом: твій стиль, фрази, теми і межі. Кожне повідомлення виглядає як твоє.',
       faq5_q: 'Як швидко я побачу результат?',
       faq5_a: 'Більшість моделей бачать вимірне зростання вже в перші 2-4 тижні. Значний результат з\'являється до другого місяця — коли розкручуються наші трафік-канали. Ми ставимо реалістичні очікування з першого дня.',
-      nav_prob: 'Проблема', nav_svc: 'Послуги', nav_res: 'Результати', nav_terms_link: 'Умови', nav_proc_link: 'Як почати',
-      nav_mob_discuss: 'Обговорити співпрацю',
+      nav_about: 'Про нас', nav_quiz: 'Діагностика', nav_svc: 'Послуги', nav_res: 'Результати', nav_terms_link: 'Умови', nav_faq: 'Відповіді на питання',
+      nav_mob_discuss: 'Написати нам',
       about_card1_title: '47+ активних моделей', about_card1_desc: 'Кожна — з персональною стратегією і виділеним чат-менеджером',
       about_card2_title: 'Середнє зростання ×3.5 за 90 днів', about_card2_desc: 'Реальні дані по наших моделях, не маркетингові обіцянки',
       about_card3_title: 'NDA з першого дня', about_card3_desc: 'Повна конфіденційність, акаунт завжди залишається твоїм',
